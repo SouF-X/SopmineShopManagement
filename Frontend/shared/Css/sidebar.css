@@ -1,0 +1,46 @@
+/* Shared sidebar navigation for every feature page. */
+.nav-family {
+  display: grid;
+  gap: 4px;
+}
+
+.nav-children {
+  display: none;
+  gap: 2px;
+  margin: 1px 0 5px 31px;
+  padding-left: 10px;
+  border-left: 1px solid color-mix(in srgb, var(--water) 30%, var(--line));
+}
+
+.nav-family.is-open .nav-children {
+  display: grid;
+  animation: submenu-in 220ms var(--ease-out) both;
+}
+
+.nav-children button {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.61rem;
+  font-weight: 620;
+  text-align: left;
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.nav-children button:hover {
+  background: var(--surface-muted);
+  color: var(--ink);
+  transform: translateX(2px);
+}
+
+.nav-children button.is-active {
+  background: var(--water-soft);
+  color: var(--brand-deep);
+  font-weight: 750;
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Impression facture Sopmine</title>
+    <link rel="stylesheet" href="/Document/Css/print.css?v=20260808printfix" />
+    <style id="print-page-orientation">@page { size: A4 portrait; margin: 8mm; }</style>
+  </head>
+  <body>
+    <div id="print-pages"></div>
+
+    <template id="print-page-template"><main class="page"></main></template>
+
+    <template id="print-copy-template">
+      <section class="pdf-copy">
+        <header>
+          <div class="sender"><img src="/shared/assets/sopmine-logo.jpeg" alt="Sopmine" /><div><small>Expéditeur</small><strong>STE SOPMINE</strong><span>N° 2 RUE MOHAMED ZERKTOUNI<br />30000 - FES - Maroc<br />05 35 62 21 85</span></div></div>
+          <div class="recipient"><small>Destinataire</small><strong data-print-partner></strong><span data-print-city></span><em data-print-page-number></em></div>
+        </header>
+        <h1><span data-print-type></span> <small># <span data-print-reference></span></small></h1>
+        <p class="date">Date: <span data-print-date></span></p>
+        <p class="note" data-print-note-line hidden>Note: <span data-print-note></span></p>
+        <table><thead><tr><th data-print-col="reference">Référence</th><th data-print-col="product">Désignation</th><th data-print-col="quantity">Quantité</th><th data-print-col="family">Famille</th><th data-print-col="unit">Unité</th><th data-print-col="vat">TVA</th><th data-print-col="priceHt">Prix U (HT)</th><th data-print-col="priceTtc">Prix U (TTC)</th><th data-print-col="margin">Marge</th><th data-print-col="totalHt">Total (HT)</th><th data-print-col="totalTtc">Total (TTC)</th></tr></thead><tbody data-print-lines></tbody></table>
+        <footer data-print-footer><p data-print-total-summary>Arrêté le <span data-print-footer-type></span> à la somme de : <span data-print-total-words></span></p><div class="totals" data-print-totals><span data-print-total-detail>Total (HT)<b data-print-subtotal></b></span><span data-print-total-detail>TVA<b data-print-tax></b></span><strong><span data-print-total-label>Total (TTC)</span><b data-print-total></b></strong></div><i data-print-signature>Cachet et signature SOPMINE</i><small>SARL AU CAPITAL DE 1400000.DH · RC : N 23643 · PATENTE : 1326384 · IF : 04502440 · CNSS : 6550479 · ICE : 001525962000067</small></footer>
+      </section>
+    </template>
+
+    <template id="print-line-template"><tr><td data-print-col="reference"></td><td data-print-col="product"></td><td data-print-col="quantity"></td><td data-print-col="family"></td><td data-print-col="unit"></td><td data-print-col="vat"></td><td data-print-col="priceHt"></td><td data-print-col="priceTtc"></td><td data-print-col="margin"></td><td data-print-col="totalHt"></td><td data-print-col="totalTtc"></td></tr></template>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SopmineWorkshop.API/SopmineWorkshop.API.csproj" />
+    <Project Path="src/SopmineWorkshop.Application/SopmineWorkshop.Application.csproj" />
+    <Project Path="src/SopmineWorkshop.Contracts/SopmineWorkshop.Contracts.csproj" />
+    <Project Path="src/SopmineWorkshop.Domain/SopmineWorkshop.Domain.csproj" />
+    <Project Path="src/SopmineWorkshop.Infrastructure/SopmineWorkshop.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SopmineWorkshop.Domain.Tests/SopmineWorkshop.Domain.Tests.csproj" />
+    <Project Path="tests/SopmineWorkshop.Infrastructure.Tests/SopmineWorkshop.Infrastructure.Tests.csproj" />
+  </Folder>
+</Solution>

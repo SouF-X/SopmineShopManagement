@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr" data-theme="light" data-feature="dashboard">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0775d7" />
+    <title>Sopmine — Tableau de bord</title>
+    <link rel="stylesheet" href="/shared/Css/fonts.css?v=20260802offline" />
+    <link rel="stylesheet" href="/shared/Css/style.css?v=20260803responsive-nav21" />
+    <link rel="stylesheet" href="/shared/Css/workflows-base.css?v=20260729online" />
+    <link rel="stylesheet" href="/shared/Css/workflows-shared.css?v=20260722i" />
+    <link rel="stylesheet" href="/shared/Css/sanitaire.css?v=20260803responsive-nav12" />
+    <link rel="stylesheet" href="/Dashboard/Css/dashboard.css?v=20260805quick-bl2" />
+  </head>
+  <body data-default-route="dashboard">
+    <a class="skip-link" href="#workspace">Aller au contenu principal</a>
+    <div class="app-frame">
+      <aside class="sidebar" id="sidebar" aria-label="Navigation principale"></aside>
+      <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+      <section class="app-stage">
+        <header class="topbar">
+          <div class="topbar-start">
+            <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Afficher ou masquer la navigation" aria-controls="sidebar" aria-expanded="false"><span class="material-symbols-rounded">menu</span></button>
+            <div class="breadcrumbs" id="breadcrumbs"><span data-breadcrumb-main>Pilotage</span><i>/</i><strong data-breadcrumb-section>Tableau de bord</strong><i data-breadcrumb-detail-separator hidden>/</i><strong data-breadcrumb-detail hidden></strong></div>
+          </div>
+          <div class="topbar-end">
+            <button class="command-trigger" id="command-trigger" type="button" aria-controls="command-layer" aria-expanded="false"><span class="material-symbols-rounded">search</span><span>Rechercher partout</span><kbd>Ctrl K</kbd></button>
+            <button class="icon-button" id="theme-toggle" type="button" aria-label="Changer le thème"><span class="material-symbols-rounded">dark_mode</span></button>
+            <button class="icon-button notification-button" type="button" aria-label="Notifications"><span class="material-symbols-rounded">notifications</span><i></i></button>
+            <button class="topbar-avatar profile-menu-trigger" id="topbar-profile" type="button" aria-label="Ouvrir le menu du profil" aria-haspopup="menu" aria-controls="profile-menu" aria-expanded="false">SB</button>
+          </div>
+        </header>
+        <main class="workspace" id="workspace" tabindex="-1"></main>
+      </section>
+    </div>
+
+    <div class="profile-menu" id="profile-menu" role="menu" aria-hidden="true" aria-label="Menu du profil">
+      <div class="profile-menu-head"><span class="profile-menu-avatar">SB</span><span><strong class="profile-menu-name">Utilisateur</strong><small class="profile-menu-role">Compte Sopmine</small></span></div>
+      <button type="button" role="menuitem" data-profile-action="settings" data-admin-only><span class="material-symbols-rounded">settings</span><span>Paramètres</span></button>
+      <div class="profile-menu-divider"></div>
+      <button class="profile-menu-danger" type="button" role="menuitem" data-profile-action="logout"><span class="material-symbols-rounded">logout</span><span>Déconnexion</span></button>
+    </div>
+
+    <div class="command-layer" id="command-layer" aria-hidden="true">
+      <button class="command-backdrop" type="button" data-command-close aria-label="Fermer"></button>
+      <section class="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
+        <div class="command-search"><span class="material-symbols-rounded">search</span><input id="command-input" name="commandSearch" autocomplete="off" aria-label="Rechercher une page ou une action" placeholder="Rechercher une page ou une action…" /><kbd>Esc</kbd></div>
+        <div class="command-content">
+          <span class="command-label" id="command-title">Navigation rapide</span>
+          <button data-route="dashboard" type="button"><i class="material-symbols-rounded">space_dashboard</i><span><strong>Tableau de bord</strong><small>Activité, priorités et indicateurs</small></span></button>
+          <button data-route="products" type="button"><i class="material-symbols-rounded">bathroom</i><span><strong>Produits</strong><small>Catalogue sanitaire et niveaux de stock</small></span><kbd>P</kbd></button>
+          <button data-route="suppliers" type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Fournisseurs</strong><small>Marques, distributeurs et contacts</small></span></button>
+          <button data-route="clients" type="button"><i class="material-symbols-rounded">person</i><span><strong>Clients</strong><small>Comptoir, professionnels et particuliers</small></span></button>
+          <button data-route="purchase-new" type="button"><i class="material-symbols-rounded">add_shopping_cart</i><span><strong>Nouveau bon de commande</strong><small>Créer un document d’achat</small></span></button>
+          <button data-route="sale-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Nouveau devis</strong><small>Créer un document de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Toutes les fonctionnalités</span>
+          <button data-route="product-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">add_box</i><span><strong>Nouveau produit</strong><small>Ajouter un article au catalogue</small></span></button>
+          <button data-route="supplier-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau fournisseur</strong><small>Ajouter un partenaire d’achat</small></span></button>
+          <button data-route="client-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau client</strong><small>Ajouter un partenaire de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Achats</span>
+          <button data-route="purchases/boncommande" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Bons de commande</strong><small>Pr&eacute;parer un achat fournisseur</small></span></button>
+          <button data-route="purchases/bonreception" data-command-search-only hidden type="button"><i class="material-symbols-rounded">inventory</i><span><strong>Bons de r&eacute;ception</strong><small>Entr&eacute;es en stock &middot; BL fournisseur</small></span></button>
+          <button data-route="purchases/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures fournisseurs</strong><small>Factures d’achat &middot; r&egrave;glements</small></span></button>
+          <button data-route="purchases/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs fournisseurs</strong><small>Retours et corrections d’achat</small></span></button>
+          <button data-route="purchases/lecture-ia" data-command-search-only hidden type="button"><i class="material-symbols-rounded">document_scanner</i><span><strong>Lecture IA</strong><small>Scanner un document fournisseur</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Ventes</span>
+          <button data-route="sales/devis" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Devis</strong><small>Pr&eacute;parer une vente</small></span></button>
+          <button data-route="sales/bonlivraison" data-command-search-only hidden type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Bons de livraison</strong><small>Sorties de stock client</small></span></button>
+          <button data-route="sales/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures clients</strong><small>Ventes factur&eacute;es &middot; r&egrave;glements</small></span></button>
+          <button data-route="sales/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs clients</strong><small>Retours et corrections de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Configuration</span>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>R&eacute;f&eacute;rentiels</strong><small>Familles de produits et unit&eacute;s</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>Familles de produits</strong><small>Classer les articles du catalogue</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">straighten</i><span><strong>Unit&eacute;s de mesure</strong><small>Unit&eacute;s propos&eacute;es pendant la saisie</small></span></button>
+          <button data-route="settings/numbering" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">tag</i><span><strong>Num&eacute;rotation</strong><small>Formats des documents</small></span></button>
+          <button data-route="settings/users" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">settings</i><span><strong>Paramètres</strong><small>Utilisateurs et numérotation</small></span></button>
+        </div>
+      </section>
+    </div>
+
+    <div id="design-template-host" hidden>
+      <template id="material-icon-template"><span class="material-symbols-rounded" aria-hidden="true"></span></template>
+      <template id="status-template"><span class="status"></span></template>
+      <template id="api-state-template"><section class="api-state"><span class="api-state-icon" data-state-icon></span><div><span class="eyebrow" data-state-eyebrow></span><h1 data-state-title></h1><p data-state-description></p></div><button class="btn btn-primary" type="button" data-api-retry><span class="material-symbols-rounded">refresh</span> Réessayer</button></section></template>
+      <template id="toast-template"><article class="toast"><span class="toast-icon" data-toast-icon></span><span class="toast-copy"><strong data-toast-title></strong><span data-toast-message></span></span><button class="toast-close" type="button" data-toast-close aria-label="Fermer la notification"><span class="material-symbols-rounded">close</span></button></article></template>
+    </div>
+
+    <a id="csv-download-link" hidden></a>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+    <script src="/shared/js/runtime-config.js"></script>
+    <script src="/shared/js/api-client.js"></script>
+    <script src="/shared/js/ui-utils.js"></script>
+    <script src="/shared/js/feedback.js"></script>
+    <script src="/shared/js/auth.js?v=20260729dashboard"></script>
+    <script src="/shared/js/namespace.js"></script>
+    <script src="/shared/js/controls.js"></script>
+    <script src="/shared/js/dom.js"></script>
+    <script src="/shared/js/utils.js"></script>
+    <script src="/shared/js/store.js"></script>
+    <script src="/shared/js/components.js"></script>
+    <script src="/shared/js/api-core.js"></script>
+    <script src="/Product/Js/api.js"></script>
+    <script src="/Supplier/Js/api.js"></script>
+    <script src="/Client/Js/api.js"></script>
+    <script src="/Document/Js/api.js"></script>
+    <script src="/Reference/Js/api.js"></script>
+    <script src="/Product/Js/mappers.js"></script>
+    <script src="/Supplier/Js/mappers.js"></script>
+    <script src="/Client/Js/mappers.js"></script>
+    <script src="/Document/Js/mappers.js"></script>
+    <script src="/Reference/Js/mappers.js"></script>
+    <script src="/shared/js/export.js"></script>
+    <script src="/shared/js/sidebar.js?v=20260803responsive-nav21"></script>
+    <script src="/shared/js/shell.js?v=20260803responsive-nav21"></script>
+    <script src="/Dashboard/Js/model.js?v=20260729layout"></script>
+    <script src="/Dashboard/Js/page.js?v=20260805quick-bl2"></script>
+    <script src="/shared/js/router.js?v=20260729dashboard"></script>
+    <script src="/shared/js/workspace.js?v=20260722a"></script>
+    <script src="/shared/js/app.js?v=20260729dashboard"></script>
+  </body>
+</html>

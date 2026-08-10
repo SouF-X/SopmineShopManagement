@@ -1,0 +1,1674 @@
+/* Sopmine Sanitaire ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â showroom visual layer.
+   Ceramic surfaces, water accents and clean structural contrast. */
+:root {
+  --brand: #0775d7;
+  --brand-hover: #0566be;
+  --brand-deep: #075b9f;
+  --brand-bright: #48acd0;
+  --brand-soft: #e7f3fb;
+  --brand-faint: #f2f8fb;
+  --water: #2f9fbd;
+  --water-soft: #e6f5f8;
+  --brass: #7f949c;
+  --brass-soft: #edf2f3;
+  --canvas: #edf3f4;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-muted: #f5f8f8;
+  --surface-strong: #e8eff1;
+  --ink: #12303d;
+  --ink-soft: #38535e;
+  --muted: #70868e;
+  --muted-light: #97a8ae;
+  --line: #d9e4e7;
+  --line-strong: #c4d3d7;
+  --warning: #428cad;
+  --warning-soft: #eaf3f7;
+  --shadow-xs: 0 1px 2px rgba(23, 62, 75, 0.04);
+  --shadow-sm: 0 8px 24px rgba(32, 73, 87, 0.065);
+  --shadow-md: 0 20px 52px rgba(31, 67, 80, 0.11);
+  --radius-xs: 6px;
+  --radius-sm: 9px;
+  --radius: 12px;
+  --radius-lg: 16px;
+}
+
+html[data-theme="dark"] {
+  --brand: #79d7ff;
+  --brand-hover: #96e1ff;
+  --brand-deep: #79d7ff;
+  --brand-bright: #36b7f2;
+  --brand-soft: rgba(121, 215, 255, 0.12);
+  --brand-faint: rgba(121, 215, 255, 0.07);
+  --water: #36b7f2;
+  --water-soft: rgba(54, 183, 242, 0.11);
+  --brass: #8fb5c7;
+  --brass-soft: rgba(143, 181, 199, 0.11);
+  --canvas: #06131d;
+  --surface: #0b1c27;
+  --surface-raised: #112633;
+  --surface-muted: #0f202b;
+  --surface-strong: #18313f;
+  --ink: #f4fbff;
+  --ink-soft: #c7d7e2;
+  --muted: #8fa8bb;
+  --muted-light: #688195;
+  --line: rgba(167, 211, 231, 0.15);
+  --line-strong: rgba(167, 221, 245, 0.26);
+  --warning: #79d7ff;
+  --warning-soft: rgba(121, 215, 255, 0.12);
+}
+
+body {
+  background: var(--canvas);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(54, 183, 242, 0.16), transparent 28%),
+    radial-gradient(circle at 84% 20%, rgba(121, 215, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 75% 84%, rgba(100, 217, 255, 0.11), transparent 26%),
+    var(--canvas);
+}
+
+.sidebar {
+  background: color-mix(in srgb, var(--surface) 97%, transparent);
+  box-shadow: 8px 0 28px rgba(22, 62, 75, 0.035);
+}
+
+.brand {
+  min-height: 72px;
+  padding-inline: 17px;
+}
+
+.brand-mark {
+  border: 1px solid color-mix(in srgb, var(--brand) 16%, var(--line));
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 7px 18px rgba(7, 117, 215, 0.15);
+}
+
+.brand-copy small {
+  color: var(--water);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.nav-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.nav-item {
+  border-radius: 8px;
+}
+
+.nav-item.is-active {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--brand) 12%, var(--surface)), color-mix(in srgb, var(--water) 5%, var(--surface)));
+  color: var(--brand-deep);
+}
+
+.nav-item.is-active .nav-rail {
+  width: 3px;
+  background: var(--brand);
+}
+
+.nav-children {
+  border-left-color: color-mix(in srgb, var(--water) 30%, var(--line));
+}
+
+.nav-children button.is-active {
+  background: var(--water-soft);
+  color: var(--brand-deep);
+}
+
+.workspace-chip {
+  border-radius: 9px;
+  background: var(--surface-muted);
+}
+
+.workspace-icon,
+.topbar-avatar {
+  border-radius: 9px;
+  background: var(--brand);
+}
+
+.topbar {
+  background: var(--surface);
+  backdrop-filter: none;
+}
+
+.command-trigger,
+.icon-button {
+  border-radius: 9px;
+}
+
+.workspace {
+  max-width: 1500px;
+}
+
+.page-head {
+  min-height: 128px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.workspace[data-section] .page-head {
+  background: var(--surface);
+}
+
+.page-head-copy,
+.page-head-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.page-head::before,
+.page-head::after {
+  display: none;
+}
+
+.page-head h1 {
+  letter-spacing: -0.045em;
+}
+
+.eyebrow {
+  color: var(--water);
+}
+
+.btn {
+  border-radius: 9px;
+}
+
+.btn-primary {
+  background: var(--brand);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 18%, transparent);
+}
+
+html[data-theme="dark"] button,
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] [role="button"] {
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .btn-primary {
+  background: #1684d8;
+  color: #fff;
+}
+
+html[data-theme="dark"] .btn-primary:hover {
+  background: #2494e4;
+}
+
+.btn-secondary {
+  background: color-mix(in srgb, var(--surface-muted) 75%, var(--surface));
+}
+
+.collection-shell,
+.record-panel,
+.form-section,
+.summary-card,
+.crm-list-panel,
+.crm-preview-card {
+  border-radius: 12px;
+  box-shadow: var(--shadow-xs);
+}
+
+.collection-toolbar {
+  background: color-mix(in srgb, var(--surface-muted) 56%, var(--surface));
+}
+
+.search-field,
+.compact-select,
+.field input,
+.field select,
+.field textarea {
+  border-radius: 8px;
+}
+
+.product-tile {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.product-tile:hover {
+  border-color: color-mix(in srgb, var(--water) 42%, var(--line));
+  box-shadow: 0 13px 30px rgba(26, 78, 94, 0.09);
+}
+
+.product-tile-media,
+html[data-theme="dark"] .product-tile-media {
+  background: var(--water-soft);
+}
+
+.product-tile-icon,
+.record-image {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--water) 30%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--brand);
+  box-shadow: 0 9px 20px rgba(29, 83, 98, 0.1);
+}
+
+.product-tile-icon::after {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 17px;
+  height: 17px;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: var(--water);
+  content: "";
+}
+
+.product-tile-icon:has(img)::after,
+.record-image:has(img)::after {
+  display: none;
+}
+
+.directory-card {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.directory-card:hover {
+  border-color: color-mix(in srgb, var(--water) 36%, var(--line));
+  box-shadow: 0 12px 28px rgba(26, 78, 94, 0.075);
+}
+
+.entity-avatar.supplier,
+.record-monogram.supplier {
+  border-color: color-mix(in srgb, var(--brand) 24%, var(--line));
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.entity-avatar.client,
+.record-monogram.client {
+  background: var(--water-soft);
+  color: var(--water);
+}
+
+.document-type-navigation button {
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.document-type-navigation button.is-active {
+  border-color: color-mix(in srgb, var(--water) 38%, var(--line));
+  background: var(--water-soft);
+}
+
+.document-type-navigation button.is-active::after {
+  background: var(--water);
+}
+
+.focused-documents .data-table-wrap {
+  background: color-mix(in srgb, var(--surface-muted) 38%, var(--surface));
+}
+
+.focused-documents .data-table td:first-child {
+  box-shadow: inset 3px 0 0 var(--water);
+}
+
+.record-hero,
+.form-page-head {
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.record-hero::after,
+.form-page-head::after {
+  border-color: color-mix(in srgb, var(--water) 8%, transparent);
+}
+
+.panel-title-icon,
+.form-section-head > .material-symbols-rounded {
+  background: var(--water-soft);
+  color: var(--water);
+}
+
+.spec-item.highlight,
+.price-block.featured {
+  background: color-mix(in srgb, var(--water-soft) 66%, var(--surface));
+}
+
+.invoice-ai-panel {
+  border-color: color-mix(in srgb, var(--water) 30%, var(--line));
+  background: var(--surface);
+}
+
+.invoice-ai-icon {
+  background: var(--water);
+}
+
+.document-paper {
+  border-color: #d8e2e5;
+  border-radius: 6px;
+  box-shadow: 0 16px 42px rgba(25, 61, 73, 0.1);
+}
+
+.paper-logo {
+  border-radius: 8px;
+}
+
+.delete-dialog {
+  width: min(480px, calc(100% - 32px));
+  max-width: none;
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.delete-dialog[open] {
+  display: block;
+}
+
+.delete-dialog::backdrop {
+  background: rgba(4, 18, 28, 0.58);
+  backdrop-filter: blur(6px);
+}
+
+.delete-dialog.is-visible {
+  opacity: 1;
+}
+
+.delete-dialog-panel {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+  transform: translateY(10px) scale(0.985);
+  transition: transform 180ms var(--ease-out);
+}
+
+.delete-dialog.is-visible .delete-dialog-panel {
+  transform: translateY(0) scale(1);
+}
+
+.delete-dialog-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.delete-dialog-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.delete-dialog-head > div {
+  display: grid;
+  gap: 4px;
+}
+
+.delete-dialog-eyebrow {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.delete-dialog-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+}
+
+.delete-dialog-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.77rem;
+  line-height: 1.55;
+}
+
+.delete-dialog-target {
+  display: block;
+  padding: 12px 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--brand) 22%, var(--line));
+  border-radius: 9px;
+  background: var(--brand-faint);
+  color: var(--ink);
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-dialog-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.delete-dialog-note .material-symbols-rounded {
+  color: var(--brand);
+  font-size: 1rem;
+}
+
+.delete-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  padding-top: 3px;
+}
+
+.delete-dialog-confirm {
+  border-color: transparent;
+  background: var(--danger);
+  color: #fff;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+
+button[data-delete],
+button[data-user-delete],
+button[data-image-remove],
+button[data-remove-contact],
+button[data-remove-line] {
+  border-color: color-mix(in srgb, var(--danger) 28%, var(--danger-soft));
+  border-radius: 12px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  box-shadow: none;
+}
+
+.delete-dialog-confirm:hover,
+button[data-delete]:hover,
+button[data-user-delete]:hover,
+button[data-image-remove]:hover,
+button[data-remove-contact]:hover,
+button[data-remove-line]:hover {
+  background: var(--danger);
+  color: #fff;
+  filter: brightness(0.94);
+  transform: translateY(-1px);
+}
+
+.toast {
+  border-radius: 10px;
+}
+
+.status {
+  border-radius: 6px;
+}
+
+@media (min-width: 921px) {
+  .page-head {
+    min-height: 116px;
+    border-color: color-mix(in srgb, var(--water) 22%, var(--line));
+    background: color-mix(in srgb, var(--water-soft) 30%, var(--surface));
+  }
+
+  .workspace[data-section] .page-head {
+    background: color-mix(in srgb, var(--water-soft) 30%, var(--surface));
+  }
+
+  .page-head::after {
+    display: block;
+    z-index: 0;
+    top: -132px;
+    right: -72px;
+    width: 250px;
+    height: 250px;
+    border: 24px solid var(--water-soft);
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: none;
+    pointer-events: none;
+  }
+
+  .page-head .count-inline {
+    border-color: color-mix(in srgb, var(--water) 28%, var(--line));
+    background: var(--water-soft);
+    color: var(--brand-deep);
+  }
+}
+
+@media (min-width: 1100px) {
+  .reference-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+  }
+
+  .reference-grid > :last-child {
+    position: sticky;
+    top: calc(var(--topbar-height) + 16px);
+  }
+}
+
+@media (max-width: 700px) {
+  .page-head {
+    min-height: 0;
+  }
+
+  .page-head::after {
+    width: 105px;
+  }
+
+  .product-tile-media {
+    min-height: 125px;
+  }
+}
+
+/* Tablet navigation rail override */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .sidebar { transform: translateX(0) !important; }
+}
+
+/* Premium tablet sidebar rail */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .sidebar {
+    border-right-color: color-mix(in srgb, var(--brand) 12%, var(--line));
+    background: color-mix(in srgb, var(--surface) 91%, var(--water-soft));
+    box-shadow: 10px 0 32px rgba(20, 42, 58, 0.09);
+    backdrop-filter: blur(18px);
+  }
+  .brand {
+    min-height: 86px;
+    padding: 13px 10px;
+  }
+  .brand::after {
+    right: 10px;
+    left: 10px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand) 28%, var(--line)) 50%, transparent);
+    opacity: .7;
+  }
+  .brand-mark {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    padding: 3px;
+    border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--line));
+    border-radius: 15px;
+    background: var(--surface);
+    box-shadow: 0 9px 20px rgba(7, 117, 215, 0.16);
+  }
+  .brand-mark img { border-radius: 11px; }
+  .primary-nav { gap: 17px; padding: 19px 9px; }
+  .nav-section { position: relative; gap: 8px; }
+  .nav-section + .nav-section::before {
+    height: 1px;
+    margin: 0 13px 2px;
+    background: color-mix(in srgb, var(--brand) 13%, var(--line));
+    content: "";
+    opacity: .8;
+  }
+  .nav-item {
+    min-height: 54px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    transition: color 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+  .nav-item > .material-symbols-rounded {
+    color: var(--muted);
+    font-size: 1.34rem;
+    transition: color 160ms ease, transform 160ms ease;
+  }
+  .nav-item:hover:not(.is-active),
+  .nav-item:focus-visible:not(.is-active) {
+    border-color: color-mix(in srgb, var(--brand) 15%, transparent);
+    background: color-mix(in srgb, var(--brand-soft) 72%, transparent);
+    outline: none;
+  }
+  .nav-item:hover:not(.is-active) > .material-symbols-rounded,
+  .nav-item:focus-visible:not(.is-active) > .material-symbols-rounded { color: var(--brand); transform: translateY(-1px); }
+  .nav-item.is-active {
+    border-color: color-mix(in srgb, var(--brand) 26%, transparent);
+    background: linear-gradient(145deg, var(--brand), color-mix(in srgb, var(--brand) 70%, var(--brand-deep)));
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(7, 117, 215, 0.2);
+  }
+  .nav-item.is-active > .material-symbols-rounded { color: #fff; }
+  .nav-item.is-active .nav-rail {
+    inset: 12px auto 12px 3px;
+    width: 3px;
+    border-radius: 0 8px 8px 0;
+    background: #fff;
+    opacity: .95;
+  }
+  .nav-family .nav-children,
+  .nav-family.is-open .nav-children {
+    border-color: color-mix(in srgb, var(--brand) 20%, var(--line));
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--surface) 96%, var(--water-soft));
+    box-shadow: 0 16px 34px rgba(20, 42, 58, 0.14);
+  }
+  .nav-children button { min-height: 40px; border-radius: 10px; }
+  .nav-children button:hover,
+  .nav-children button:focus-visible { background: var(--brand-soft); color: var(--brand-deep); outline: none; }
+  .nav-children button.is-active { border: 1px solid color-mix(in srgb, var(--brand) 16%, transparent); background: var(--brand-soft); box-shadow: inset 3px 0 0 var(--brand); }
+}
+
+/* Product hero mobile actions stay balanced and independently tappable. */
+@media (max-width: 700px) {
+  #products-page-view .page-head {
+    gap: 18px;
+    padding: 18px 16px;
+  }
+
+  #products-page-view .page-head-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 10px;
+  }
+
+  #products-page-view .page-head-actions .btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  #products-page-view .page-head-actions .btn-secondary .btn-label {
+    display: inline;
+  }
+}
+/* Cards are the touch-first product presentation on tablet and mobile. */
+@media (max-width: 1199px) {
+  #products-page-view .toolbar-actions {
+    display: none;
+  }
+}
+/* Tablet product cards use a two-column browsing rhythm. */
+@media (min-width: 601px) and (max-width: 1199px) {
+  #products-page-view .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile product detail actions use compact icon buttons. */
+@media (max-width: 700px) {
+  #product-detail-view .record-actions {
+    width: auto;
+    align-self: flex-end;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  #product-detail-view .record-actions .btn {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 12px;
+  }
+
+  #product-detail-view .record-actions .btn-primary {
+    flex: 0 0 44px;
+    font-size: 0;
+  }
+
+  #product-detail-view .record-actions .btn-primary .material-symbols-rounded,
+  #product-detail-view .record-actions .btn-secondary .material-symbols-rounded {
+    font-size: 1.1rem;
+  }
+}
+/* Product detail mobile hero: actions stay beside the icon, identity moves below. */
+@media (max-width: 700px) {
+  #product-detail-view .record-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "image actions" "heading heading";
+    align-items: start;
+    gap: 16px;
+  }
+
+  #product-detail-view .record-identity { display: contents; }
+  #product-detail-view .record-image { grid-area: image; align-self: start; }
+  #product-detail-view .record-heading { grid-area: heading; min-width: 0; width: 100%; }
+  #product-detail-view .record-actions { grid-area: actions; align-self: start; }
+
+  #product-detail-view .record-actions .btn {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  #product-detail-view .record-actions .btn .material-symbols-rounded {
+    display: block;
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+/* Product identity fields use compact two-column rows on mobile. */
+@media (max-width: 700px) {
+  #product-detail-view .record-grid > .record-column:first-child .spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .spec-item,
+  #product-detail-view .record-grid > .record-column:first-child .spec-item.highlight {
+    min-height: 0;
+    align-content: center;
+    gap: 5px;
+    padding: 14px 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .spec-item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: 20px;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .spec-item:nth-child(even) {
+    padding-left: 20px;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .spec-item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+/* Product pricing fields use the same compact three-column row treatment on mobile. */
+@media (max-width: 700px) {
+  #product-detail-view .record-grid > .record-column:first-child .price-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .price-block,
+  #product-detail-view .record-grid > .record-column:first-child .price-block.featured {
+    min-height: 0;
+    align-content: center;
+    gap: 5px;
+    padding: 14px 0;
+    border: 0;
+
+    border-radius: 0;
+    background: transparent;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .price-block:not(:last-child) {
+    border-right: 1px solid var(--line);
+    padding-right: 14px;
+  }
+
+  #product-detail-view .record-grid > .record-column:first-child .price-block:not(:first-child) {
+    padding-left: 14px;
+  }
+}
+
+/* Keep product detail spacing aligned with the mobile dashboard and catalogue. */
+@media (max-width: 700px) {
+  #product-detail-view {
+    padding-bottom: 20px;
+  }
+
+  #product-detail-view .record-hero {
+    margin-bottom: 14px;
+  }
+
+  #product-detail-view .record-grid,
+  #product-detail-view .record-column {
+    gap: 14px;
+  }
+
+  #product-detail-view .record-actions .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #product-detail-view .record-actions .btn-primary .material-symbols-rounded {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+/* Mobile page actions share the compact icon rail across directories. */
+@media (max-width: 767px) {
+  #suppliers-page-view .page-head-actions,
+  #products-page-view .page-head-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 8px;
+  }
+
+  #suppliers-page-view .page-head-actions .btn,
+  #products-page-view .page-head-actions .btn {
+    flex: 0 0 46px;
+    width: 46px;
+    min-width: 46px;
+    height: 46px;
+    min-height: 46px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  #suppliers-page-view .page-head-actions .btn-secondary .btn-label,
+  #products-page-view .page-head-actions .btn-secondary .btn-label,
+  #suppliers-page-view .page-head-actions .btn-primary [data-action-label],
+  #products-page-view .page-head-actions .btn-primary [data-action-label] {
+    display: none;
+  }
+}
+
+/* Mobile sheet close controls stay pinned to the right edge. */
+@media (max-width: 767px) {
+  .mobile-section-sheet-head > .icon-button[data-mobile-sheet-close] {
+    margin-inline-start: auto;
+    justify-self: end;
+  }
+}
+/* Mobile sheet headers without a back button use a two-column layout. */
+@media (max-width: 767px) {
+  .mobile-section-sheet-head:has(> .mobile-sheet-back[hidden]) {
+    grid-template-columns: minmax(0, 1fr) 40px;
+  }
+
+  .mobile-section-sheet-head:has(> .mobile-sheet-back[hidden]) > div {
+    grid-column: 1;
+    text-align: left;
+  }
+
+  .mobile-section-sheet-head:has(> .mobile-sheet-back[hidden]) > .icon-button[data-mobile-sheet-close] {
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+/* Commerce choices use the same compact sheet size on mobile. */
+@media (min-width: 480px) and (max-width: 767px) {
+  .mobile-commerce-choice-list:not([hidden]) .mobile-sheet-intro {
+    display: none;
+  }
+
+  .mobile-commerce-choice-grid {
+    margin-top: 2px;
+  }
+
+  .mobile-commerce-choice {
+    grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 64px;
+    align-content: center;
+  }
+
+  .mobile-commerce-choice > span:nth-child(2) {
+    grid-column: 2;
+  }
+
+  .mobile-commerce-choice small {
+    white-space: normal;
+  }
+}
+/* Keep commerce choice text consistent across phone widths. */
+@media (min-width: 480px) and (max-width: 767px) {
+  .mobile-commerce-choice {
+    grid-template-columns: 48px minmax(0, 1fr);
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .mobile-commerce-choice-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 1.3rem;
+  }
+
+  .mobile-commerce-choice > span:nth-child(2) {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .mobile-commerce-choice strong {
+    white-space: nowrap;
+  }
+
+  .mobile-commerce-choice small {
+    display: none;
+    white-space: nowrap;
+  }
+}
+/* Keep short document workflows on one compact mobile row. */
+@media (max-width: 767px) {
+  #document-detail-view .status-track:has(> .flow-step:nth-child(2)):not(:has(> .flow-step:nth-child(3))) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #document-detail-view .status-track:has(> .flow-step:nth-child(3)):not(:has(> .flow-step:nth-child(4))) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #document-detail-view .status-track .flow-step {
+    min-width: 0;
+    min-height: 76px;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 7px;
+    padding: 10px 9px;
+  }
+
+  #document-detail-view .status-track .flow-step-copy {
+    min-width: 0;
+  }
+
+  #document-detail-view .status-track .flow-step-copy strong,
+  #document-detail-view .status-track .flow-step-copy span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
+  }
+
+  #document-detail-view .status-track .flow-step:not(:last-child)::after {
+    top: 18px;
+    right: 0;
+    bottom: 18px;
+    left: auto;
+    width: 1px;
+    height: auto;
+  }
+}
+/* Keep the mobile totals dropdown readable and put it before the icon actions. */
+@media (max-width: 700px) {
+  #document-detail-view .record-actions {
+    justify-content: flex-start;
+  }
+
+  #document-detail-view .record-actions .print-totals-control {
+    order: 1;
+    display: inline-flex;
+    width: 178px;
+    min-width: 156px;
+    max-width: 178px;
+    height: 44px;
+    min-height: 44px;
+    flex: 1 1 178px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: none;
+    color: var(--ink-soft);
+    font-size: 0.72rem;
+    line-height: 1;
+  }
+
+  #document-detail-view .record-actions [data-print] {
+    order: 2;
+  }
+
+  #document-detail-view .record-actions [data-record-payment] {
+    order: 3;
+  }
+
+  #document-detail-view .record-actions [data-edit] {
+    order: 4;
+  }
+
+  #document-detail-view .record-actions [data-delete] {
+    order: 5;
+  }
+
+  #document-detail-view .record-actions .print-totals-control > .material-symbols-rounded {
+    position: static;
+    z-index: auto;
+    display: block;
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  #document-detail-view .record-actions .print-totals-control .control-enhanced {
+    position: relative;
+    z-index: auto;
+    inset: auto;
+    display: inline-block;
+    width: 132px;
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  #document-detail-view .record-actions .print-totals-control .control-enhanced::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    content: "";
+    pointer-events: none;
+    transform: translateY(-65%) rotate(45deg);
+  }
+
+  #document-detail-view .record-actions .print-totals-control .control-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    min-height: 42px;
+    overflow: hidden;
+    padding: 0 28px 0 0;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #document-detail-view .record-actions .print-totals-control .control-trigger::after {
+    display: none;
+  }
+}
+/* Let the totals dropdown give back only the width needed to keep the action row intact. */
+@media (max-width: 700px) {
+  #document-detail-view .record-actions .print-totals-control {
+    width: clamp(156px, calc(100% - 159px), 178px);
+    min-width: 156px;
+    max-width: 178px;
+    flex: 0 1 auto;
+  }
+}
+/* The AI workspace keeps its own stepper on mobile; hide the desktop section rail. */
+@media (max-width: 767px) {
+  #invoice-ai-workspace-view > .document-type-navigation {
+    display: none !important;
+  }
+}
+/* Subtle article numbering shared by purchase and sales line editors. */
+.line-editor-scroll {
+  counter-reset: article-line;
+}
+
+.line-editor-row {
+  counter-increment: article-line;
+}
+
+.line-editor-product > span:first-child {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  justify-self: start;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.line-editor-product > span:first-child::after {
+  content: " #" counter(article-line);
+}
+/* Keep the article number on the line card, separate from the product field. */
+.line-editor-row::before {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  content: "Produit #" counter(article-line);
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.line-editor-product > span:first-child {
+  display: block;
+  width: auto;
+  max-width: none;
+  justify-self: stretch;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.59rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.line-editor-product > span:first-child::after {
+  content: none;
+}
+
+/* Final article marker cleanup: keep one marker outside the product fields. */
+.line-editor-scroll {
+  padding-top: 10px;
+}
+
+.line-editor-row {
+  position: relative;
+}
+
+.line-editor-row::before {
+  position: absolute;
+  top: -9px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex !important;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  align-items: center;
+  justify-self: auto;
+  grid-column: auto;
+  padding: 3px 7px;
+  border: 1px solid color-mix(in srgb, var(--brand) 16%, var(--line));
+  border-radius: 6px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  content: "Produit #" counter(article-line) !important;
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.line-editor-product > span:first-child {
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  justify-self: stretch;
+  padding: 0 !important;
+  border-radius: 0;
+  border: 0;
+  background: transparent !important;
+  color: var(--muted);
+  font-size: 0.59rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.line-editor-product > span:first-child::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Keep only the article number in the outside marker. */
+.line-editor-row::before {
+  content: counter(article-line) !important;
+}
+
+/* Responsive metadata: do not reserve the hidden margin slot. */
+@container line-editor (min-width: 421px) and (max-width: 800px) {
+  .line-editor-meta:not(:has(> [data-line-field="margin"]:not([hidden]))) > [data-line-field="totalHt"] {
+    grid-column: 3 / 9;
+  }
+
+  .line-editor-meta:not(:has(> [data-line-field="margin"]:not([hidden]))) > .line-editor-total-ttc-meta {
+    grid-column: 9 / 15;
+  }
+}
+
+
+/* Mobile line cards: prioritize primary inputs and keep secondary metadata compact. */
+@container line-editor (max-width: 420px) {
+  .line-editor-main {
+    grid-template-columns: minmax(72px, 0.7fr) minmax(104px, 1fr) minmax(112px, 1.2fr);
+    gap: 8px;
+  }
+
+  .line-editor-product {
+    box-sizing: border-box;
+    padding-right: 52px;
+  }
+
+  .line-editor-remove {
+    position: absolute;
+    top: 28px;
+    right: 12px;
+    z-index: 3;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    margin: 0;
+    justify-self: auto;
+  }
+
+  .line-editor-meta {
+    grid-template-columns: minmax(0, 1.7fr) minmax(72px, 0.8fr);
+    gap: 8px;
+  }
+
+  .line-editor-meta > [data-line-field="reference"] {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .line-editor-meta > [data-line-field="unit"] {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .line-editor-meta > [data-line-field="family"] {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  .line-editor-meta > [data-line-field="vat"] {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .line-editor-meta > [data-line-field="margin"] {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    min-width: 0;
+  }
+
+  .line-editor-meta > [data-line-field="reference"] strong,
+  .line-editor-meta > [data-line-field="unit"] strong {
+    height: 32px;
+    padding: 0 9px;
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--surface) 78%, var(--surface-muted));
+    font-size: 0.66rem;
+  }
+
+  .line-editor-meta > [data-line-field="family"] .control-enhanced,
+  .line-editor-meta > [data-line-field="family"] .control-trigger {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .line-editor-meta > [data-line-field="family"] .control-trigger {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .line-editor-meta:not(:has(> [data-line-field="margin"]:not([hidden]))) > [data-line-field="totalHt"] {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .line-editor-meta:not(:has(> [data-line-field="margin"]:not([hidden]))) > .line-editor-total-ttc-meta {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="totalHt"] {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > .line-editor-total-ttc-meta {
+    grid-column: 2;
+    grid-row: 4;
+  }
+}
+
+
+/* Mobile spacing refinement: separate the destructive action and balance totals. */
+@container line-editor (max-width: 420px) {
+  .line-editor-product {
+    padding-right: 64px;
+  }
+
+  .line-editor-remove {
+    top: 30px;
+  }
+
+  .line-editor-meta {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+
+/* Ensure the mobile product spacing wins over the shared field reset. */
+@container line-editor (max-width: 420px) {
+  .line-editor-main .line-editor-product {
+    padding-right: 64px;
+  }
+}
+
+
+/* Sale cards: share the secondary row as Family 50%, VAT 25%, Margin 25%. */
+@container line-editor (max-width: 420px) {
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="reference"] {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="unit"] {
+    grid-column: 3 / 5;
+    grid-row: 1;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="family"] {
+    grid-column: 1 / 3;
+    grid-row: 2;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="vat"] {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="margin"] {
+    grid-column: 4;
+    grid-row: 2;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > [data-line-field="totalHt"] {
+    grid-column: 1 / 3;
+    grid-row: 3;
+  }
+
+  .line-editor-meta:has(> [data-line-field="margin"]:not([hidden])) > .line-editor-total-ttc-meta {
+    grid-column: 3 / 5;
+    grid-row: 3;
+  }
+}
+/* BL fast entry: delivery-only responsive simplification. */
+#document-form-view.delivery-fast-form .line-editor-main .line-editor-quantity {
+  grid-area: auto;
+}
+
+@media (max-width: 1180px) {
+  #document-form-view.delivery-fast-form .document-due-date-field,
+  #document-form-view.delivery-fast-form .document-reference-field,
+  #document-form-view.delivery-fast-form .document-status-field,
+  #document-form-view.delivery-fast-form .form-aside {
+    display: none !important;
+  }
+
+  #document-form-view.delivery-fast-form .form-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-meta,
+  #document-form-view.delivery-fast-form .line-editor-price-ht {
+    display: none !important;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-main {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 40px;
+    gap: 10px;
+    align-items: end;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-price-ttc {
+    display: grid;
+    grid-column: 2;
+    min-width: 0;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-product {
+    box-sizing: border-box;
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-quantity {
+    grid-column: 1;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-remove {
+    position: static;
+    grid-column: 3;
+    grid-row: 2;
+    z-index: auto;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    margin: 0;
+    justify-self: stretch;
+    align-self: end;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-scroll {
+    gap: 14px;
+  }
+
+  #document-form-view.delivery-fast-form .add-line {
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  #document-form-view.delivery-fast-form .form-page-head .form-actions {
+    position: static;
+    display: flex;
+    width: 100%;
+    min-height: 0;
+    margin-top: 12px;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  #document-form-view.delivery-fast-form .form-page-head .form-actions .btn-secondary {
+    display: none;
+  }
+
+  #document-form-view.delivery-fast-form .form-page-head .form-actions .btn-primary {
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    min-height: 44px;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 16px;
+    border-radius: 11px;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  #document-form-view.delivery-fast-form .form-page-head .form-actions .btn-primary .material-symbols-rounded {
+    display: block;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  #document-form-view.delivery-fast-form .form-page-head .form-actions .btn-primary [data-submit-label] {
+    display: inline;
+  }
+
+  #document-form-view.delivery-fast-form .line-editor-remove {
+    position: static;
+    top: auto;
+    right: auto;
+    grid-column: 3;
+    grid-row: 2;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    justify-self: stretch;
+    align-self: end;
+  }
+}
+
+
+
+#document-form-view.delivery-fast-form .delivery-mobile-submit { display: none; }
+
+
+@media (max-width: 1180px) {
+  #document-form-view.delivery-fast-form .document-note-section {
+    display: none !important;
+  }
+
+  #document-form-view.delivery-fast-form .form-page-head .form-actions .btn-primary {
+    display: none !important;
+  }
+
+  #document-form-view.delivery-fast-form .delivery-mobile-submit {
+    display: flex;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  #document-form-view.delivery-fast-form .delivery-mobile-submit .btn-primary {
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 767px) {
+  #document-form-view.delivery-fast-form .form-page-head .form-actions {
+    display: none;
+  }
+}
+
+
+
+
+
+
+/* Mobile document actions: keep edit/delete left and size copy toggle to its content. */
+@media (max-width: 700px) {
+  #document-detail-view .record-actions [data-edit] {
+    order: 1;
+  }
+
+  #document-detail-view .record-actions [data-delete] {
+    order: 2;
+  }
+
+  #document-detail-view .record-actions .print-option {
+    order: 3;
+    width: max-content;
+    min-width: 0;
+    flex: 0 0 auto;
+  }
+
+  #document-detail-view .record-actions .print-totals-control {
+    order: 4;
+  }
+
+  #document-detail-view .record-actions [data-print] {
+    order: 5;
+  }
+}
+/* Mobile document actions: right-align the action row and place copies beneath it. */
+@media (max-width: 700px) {
+  #document-detail-view .record-actions {
+    justify-content: flex-end;
+  }
+
+  #document-detail-view .record-actions .print-totals-control {
+    order: 1;
+  }
+
+  #document-detail-view .record-actions [data-print] {
+    order: 2;
+  }
+
+  #document-detail-view .record-actions [data-record-payment] {
+    order: 3;
+  }
+
+  #document-detail-view .record-actions [data-edit] {
+    order: 4;
+  }
+
+  #document-detail-view .record-actions [data-delete] {
+    order: 5;
+  }
+
+  #document-detail-view .record-actions::before {
+    content: "";
+    width: 0;
+    height: 0;
+    flex: 0 0 100%;
+    order: 6;
+  }
+
+  #document-detail-view .record-actions .print-option {
+    order: 7;
+    width: max-content;
+    min-width: 0;
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="dark" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#06151b" />
+    <title>Sopmine Sanitaire — Connexion</title>
+    <link href="/shared/Css/fonts.css?v=20260802offline" rel="stylesheet" />
+    <script src="/shared/js/theme-init.js"></script>
+    <script src="/shared/js/runtime-config.js"></script>
+    <script src="/shared/js/api-client.js?v=20260511drafts1"></script>
+    <script src="/shared/js/ui-utils.js"></script>
+    <script src="/shared/js/feedback.js"></script>
+    <script src="/shared/js/auth.js?v=20260713sanitaire1"></script>
+    <link href="/Login/css/style.css?v=20260713focused1" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="login-page">
+      <header class="login-header">
+        <a class="login-brand" href="/" aria-label="Accueil Sopmine">
+          <img alt="Logo Sopmine" src="/shared/assets/sopmine-logo.jpeg" width="48" height="48" data-sopmine-logo />
+          <span><strong>Sopmine</strong><small>Sanitaire & Maison</small></span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Changer de thème">
+          <span class="material-symbols-outlined" id="theme-toggle-icon" aria-hidden="true">light_mode</span>
+          <span id="theme-toggle-label">Mode clair</span>
+        </button>
+      </header>
+
+      <section class="login-access" aria-label="Connexion Sopmine">
+        <div class="login-panel">
+          <div class="panel-kicker"><span class="material-symbols-outlined" aria-hidden="true">shield_lock</span> Accès équipe</div>
+          <div class="login-heading">
+            <h1>Bienvenue sur Sopmine</h1>
+            <p>Connectez-vous pour accéder à votre espace de gestion.</p>
+          </div>
+
+          <div class="feedback hidden" id="login-feedback" role="status" aria-live="polite"><div class="feedback-inner"><span class="material-symbols-outlined" data-feedback-icon></span><span data-feedback-message></span></div><ul data-feedback-details hidden></ul></div>
+          <template id="feedback-detail-template"><li></li></template>
+
+          <form class="login-form" id="login-form" novalidate>
+            <label class="login-field" for="email">
+              <span class="login-field-label">Adresse email</span>
+              <span class="input-control">
+                <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+                <input id="email" name="email" type="email" placeholder="nom@entreprise.com" autocomplete="username" autofocus required />
+              </span>
+            </label>
+
+            <label class="login-field" for="password">
+              <span class="login-field-label">Mot de passe</span>
+              <span class="input-control password-control">
+                <span class="material-symbols-outlined" aria-hidden="true">key</span>
+                <input id="password" name="password" type="password" placeholder="Votre mot de passe" autocomplete="current-password" required />
+                <button class="password-toggle" id="password-toggle" type="button" aria-label="Afficher le mot de passe" title="Afficher le mot de passe">
+                  <span class="material-symbols-outlined" aria-hidden="true">visibility</span>
+                </button>
+              </span>
+            </label>
+
+            <div class="login-options">
+              <label class="remember-choice" for="remember-me">
+                <input class="remember-input" id="remember-me" name="rememberMe" type="checkbox" checked />
+                <span class="remember-box" aria-hidden="true"></span>
+                <span>Se souvenir de moi</span>
+              </label>
+              <button class="forgot-password" id="forgot-password" type="button">Mot de passe oublié&nbsp;?</button>
+            </div>
+
+            <button class="login-submit" id="login-submit" type="submit">
+              <span id="login-submit-label">Entrer dans Sopmine</span>
+              <span class="submit-arrow"><span class="material-symbols-outlined" id="login-submit-icon" aria-hidden="true">arrow_forward</span></span>
+            </button>
+          </form>
+
+          <div class="login-security">
+            <span class="security-icon material-symbols-outlined" aria-hidden="true">verified_user</span>
+            <span><strong>Session sécurisée</strong><small>Connexion chiffrée et accès réservé à votre équipe.</small></span>
+          </div>
+        </div>
+        <p class="login-footnote">Sopmine · Outil de gestion interne</p>
+      </section>
+    </main>
+
+    <dialog class="password-help-dialog" id="password-help-dialog" aria-labelledby="password-help-title">
+      <div class="password-help-content">
+        <span class="password-help-icon material-symbols-outlined" aria-hidden="true">support_agent</span>
+        <div><span class="panel-kicker">Assistance</span><h2 id="password-help-title">Mot de passe oublié&nbsp;?</h2></div>
+        <p>Contactez votre administrateur pour réinitialiser votre mot de passe.</p>
+        <button class="password-help-close" id="password-help-close" type="button">Compris</button>
+      </div>
+    </dialog>
+
+    <script src="/Login/js/app.js?v=20260713focused1"></script>
+  </body>
+</html>

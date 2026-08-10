@@ -1,0 +1,186 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; font-size: 9.5px; }
+.page { min-height: 281mm; page-break-after: always; }
+.page--two-copies { display: grid; min-height: 190mm; grid-template-columns: 1fr 1fr; }
+.page--two-copies .pdf-copy:first-child { border-right: 1px dashed #777; }
+.pdf-copy { position: relative; min-height: 281mm; padding: 4mm 6mm 10mm; }
+.page--two-copies .pdf-copy { min-height: 190mm; }
+header { display: flex; min-height: 30mm; justify-content: space-between; }
+.sender { display: flex; gap: 3mm; }
+.sender img { width: 13mm; height: 13mm; object-fit: cover; }
+.sender div, .recipient { display: grid; gap: 1mm; }
+.sender strong, .recipient strong { font-size: 11px; }
+.recipient { position: relative; min-width: 45mm; }
+.recipient em { position: absolute; top: 0; right: 0; font-style: normal; }
+h1 { margin: 5mm 0 2mm; font-size: 16px; }
+h1 small { font-size: 9px; }
+.date { font-weight: bold; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 2mm 1.8mm; border: 1px solid #111; text-align: center; }
+th { font-size: 9px; font-weight: 700; }
+td { font-size: 9px; }
+th[data-print-col="reference"],
+td[data-print-col="reference"],
+th[data-print-col="product"],
+td[data-print-col="product"] { text-align: left; }
+td[data-print-col="reference"],
+td[data-print-col="product"] { font-weight: 700; }
+footer { display: grid; grid-template-columns: 1fr 42mm; gap: 5mm; margin-top: 4mm; }
+footer > small { position: absolute; right: 6mm; bottom: 4mm; left: 6mm; grid-column: 1 / -1; font-size: 7px; text-align: center; }
+.totals { border: 1px solid #111; }
+.totals > span, .totals > strong { display: flex; justify-content: space-between; padding: 1.5mm; border-bottom: 1px solid #111; }
+.totals strong { border: 0; }
+footer [data-print-signature] { align-self: end; font-size: 10px; font-style: normal; font-weight: 700; }
+[hidden] { display: none !important; }
+
+@media screen and (max-width: 700px) {
+  html,
+  body {
+    overflow-x: auto;
+  }
+
+  th,
+  td {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+}
+/* Mobile live preview: keep every selected column inside the viewport. */
+@media screen and (max-width: 700px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .page,
+  .pdf-copy {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .pdf-copy {
+    padding: 4mm 3mm 8mm;
+  }
+
+  header {
+    min-width: 0;
+    gap: 4mm;
+  }
+
+  .sender,
+  .recipient {
+    width: 48%;
+    min-width: 0;
+  }
+
+  .sender div,
+  .recipient {
+    min-width: 0;
+  }
+
+  .sender span,
+  .recipient span {
+    overflow-wrap: anywhere;
+  }
+
+  table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  th,
+  td {
+    padding: 1.1mm 0.7mm;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  th {
+    font-size: 6px;
+  }
+
+  td {
+    font-size: 6.5px;
+  }
+}
+
+/* Content-based column sizing: every column except Désignation keeps only the
+   width it needs (max of header and longest value); Désignation wraps and
+   absorbs all remaining table width. */
+th[data-print-col="product"],
+td[data-print-col="product"] {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+th[data-print-col]:not([data-print-col="product"]),
+td[data-print-col]:not([data-print-col="product"]) {
+  white-space: nowrap;
+}
+
+/* Two-copy landscape print: keep both copies usable instead of letting the
+   full-width table collapse the designation column into vertical text. */
+.page--two-copies {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.page--two-copies .pdf-copy {
+  min-width: 0;
+  overflow: hidden;
+  padding: 4mm 3mm 8mm;
+}
+
+.page--two-copies table {
+  table-layout: fixed;
+  font-size: 7px;
+}
+
+.page--two-copies th,
+.page--two-copies td {
+  padding: 1mm 0.7mm;
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  font-size: 7px;
+  line-height: 1.15;
+}
+
+.page--two-copies th { font-size: 6.5px; }
+
+.page--two-copies th[data-print-col="reference"],
+.page--two-copies td[data-print-col="reference"] { width: 10%; }
+
+.page--two-copies th[data-print-col="product"],
+.page--two-copies td[data-print-col="product"] { width: 22%; }
+
+.page--two-copies th[data-print-col="quantity"],
+.page--two-copies td[data-print-col="quantity"] { width: 7%; }
+
+.page--two-copies th[data-print-col="family"],
+.page--two-copies td[data-print-col="family"] { width: 11%; }
+
+.page--two-copies th[data-print-col="unit"],
+.page--two-copies td[data-print-col="unit"] { width: 6%; }
+
+.page--two-copies th[data-print-col="vat"],
+.page--two-copies td[data-print-col="vat"] { width: 6%; }
+
+.page--two-copies th[data-print-col="priceHt"],
+.page--two-copies td[data-print-col="priceHt"],
+.page--two-copies th[data-print-col="priceTtc"],
+.page--two-copies td[data-print-col="priceTtc"] { width: 8%; }
+
+.page--two-copies th[data-print-col="margin"],
+.page--two-copies td[data-print-col="margin"] { width: 6%; }
+
+.page--two-copies th[data-print-col="totalHt"],
+.page--two-copies td[data-print-col="totalHt"],
+.page--two-copies th[data-print-col="totalTtc"],
+.page--two-copies td[data-print-col="totalTtc"] { width: 8%; }
+
+.page--two-copies footer {
+  grid-template-columns: minmax(0, 1fr) 34mm;
+  gap: 3mm;
+}

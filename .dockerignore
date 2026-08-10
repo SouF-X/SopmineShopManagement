@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/*.user
+**/*.log
+**/*.err.log
+**/*.out.log
+.git/
+.env
+.env.*
+!.env.example
+tmp/
+artifacts/
+.codex-logs/

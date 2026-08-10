@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="fr" data-theme="light" data-feature="settings">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0775d7" />
+    <title>Sopmine — Paramètres</title>
+    <link rel="stylesheet" href="/shared/Css/fonts.css?v=20260802offline" />
+    <link rel="stylesheet" href="/shared/Css/style.css?v=20260803responsive-nav21" />
+    <link rel="stylesheet" href="/shared/Css/workflows-base.css?v=20260729online" />
+    <link rel="stylesheet" href="/shared/Css/workflows-shared.css?v=20260805settingsuserscards5j" />
+    <link rel="stylesheet" href="/shared/Css/sanitaire.css?v=20260803responsive-nav12" />
+  </head>
+  <body data-default-route="settings/users">
+    <a class="skip-link" href="#workspace">Aller au contenu principal</a>
+    <div class="app-frame">
+      <aside class="sidebar" id="sidebar" aria-label="Navigation principale"></aside>
+
+      <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+
+      <section class="app-stage">
+        <header class="topbar">
+          <div class="topbar-start">
+            <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Afficher ou masquer la navigation" aria-controls="sidebar" aria-expanded="false">
+              <span class="material-symbols-rounded">menu</span>
+            </button>
+            <div class="breadcrumbs" id="breadcrumbs"><span data-breadcrumb-main>Configuration</span><i>/</i><strong data-breadcrumb-section>Paramètres</strong><i data-breadcrumb-detail-separator hidden>/</i><strong data-breadcrumb-detail hidden></strong></div>
+          </div>
+
+          <div class="topbar-end">
+            <button class="command-trigger" id="command-trigger" type="button" aria-controls="command-layer" aria-expanded="false">
+              <span class="material-symbols-rounded">search</span>
+              <span>Rechercher partout</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+            <button class="icon-button" id="theme-toggle" type="button" aria-label="Changer le thème">
+              <span class="material-symbols-rounded">dark_mode</span>
+            </button>
+            <button class="icon-button notification-button" type="button" aria-label="Notifications">
+              <span class="material-symbols-rounded">notifications</span><i></i>
+            </button>
+            <button class="topbar-avatar profile-menu-trigger" id="topbar-profile" type="button" aria-label="Ouvrir le menu du profil" aria-haspopup="menu" aria-controls="profile-menu" aria-expanded="false">SB</button>
+          </div>
+        </header>
+
+        <main class="workspace" id="workspace" tabindex="-1"></main>
+      </section>
+    </div>
+
+    <div class="profile-menu" id="profile-menu" role="menu" aria-hidden="true" aria-label="Menu du profil">
+      <div class="profile-menu-head">
+        <span class="profile-menu-avatar">SB</span>
+        <span><strong class="profile-menu-name">Utilisateur</strong><small class="profile-menu-role">Compte Sopmine</small></span>
+      </div>
+      <button type="button" role="menuitem" data-profile-action="settings" data-admin-only><span class="material-symbols-rounded">settings</span><span>Paramètres</span></button>
+      <div class="profile-menu-divider"></div>
+      <button class="profile-menu-danger" type="button" role="menuitem" data-profile-action="logout"><span class="material-symbols-rounded">logout</span><span>Déconnexion</span></button>
+    </div>
+
+    <div class="command-layer" id="command-layer" aria-hidden="true">
+      <button class="command-backdrop" type="button" data-command-close aria-label="Fermer"></button>
+      <section class="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
+        <div class="command-search">
+          <span class="material-symbols-rounded">search</span>
+          <input id="command-input" name="commandSearch" autocomplete="off" aria-label="Rechercher une page ou une action" placeholder="Rechercher une page ou une action…" />
+          <kbd>Esc</kbd>
+        </div>
+        <div class="command-content">
+          <span class="command-label" id="command-title">Navigation rapide</span>
+          <button data-route="products" type="button"><i class="material-symbols-rounded">bathroom</i><span><strong>Produits</strong><small>Catalogue sanitaire et niveaux de stock</small></span><kbd>P</kbd></button>
+          <button data-route="suppliers" type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Fournisseurs</strong><small>Marques, distributeurs et contacts</small></span></button>
+          <button data-route="clients" type="button"><i class="material-symbols-rounded">person</i><span><strong>Clients</strong><small>Comptoir, professionnels et particuliers</small></span></button>
+          <button data-route="purchase-new" type="button"><i class="material-symbols-rounded">add_shopping_cart</i><span><strong>Nouveau bon de commande</strong><small>Créer un document d’achat</small></span></button>
+          <button data-route="sale-new" type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Nouveau devis</strong><small>Créer un document de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Toutes les fonctionnalités</span>
+          <button data-route="dashboard" data-command-search-only hidden type="button"><i class="material-symbols-rounded">space_dashboard</i><span><strong>Tableau de bord</strong><small>Activit&eacute;, priorit&eacute;s et indicateurs</small></span></button>
+          <button data-route="product-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">add_box</i><span><strong>Nouveau produit</strong><small>Ajouter un article au catalogue</small></span></button>
+          <button data-route="supplier-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau fournisseur</strong><small>Ajouter un partenaire d’achat</small></span></button>
+          <button data-route="client-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau client</strong><small>Ajouter un partenaire de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Achats</span>
+          <button data-route="purchases/boncommande" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Bons de commande</strong><small>Pr&eacute;parer un achat fournisseur</small></span></button>
+          <button data-route="purchases/bonreception" data-command-search-only hidden type="button"><i class="material-symbols-rounded">inventory</i><span><strong>Bons de r&eacute;ception</strong><small>Entr&eacute;es en stock &middot; BL fournisseur</small></span></button>
+          <button data-route="purchases/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures fournisseurs</strong><small>Factures d’achat &middot; r&egrave;glements</small></span></button>
+          <button data-route="purchases/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs fournisseurs</strong><small>Retours et corrections d’achat</small></span></button>
+          <button data-route="purchases/lecture-ia" data-command-search-only hidden type="button"><i class="material-symbols-rounded">document_scanner</i><span><strong>Lecture IA</strong><small>Scanner un document fournisseur</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Ventes</span>
+          <button data-route="sales/devis" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Devis</strong><small>Pr&eacute;parer une vente</small></span></button>
+          <button data-route="sales/bonlivraison" data-command-search-only hidden type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Bons de livraison</strong><small>Sorties de stock client</small></span></button>
+          <button data-route="sales/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures clients</strong><small>Ventes factur&eacute;es &middot; r&egrave;glements</small></span></button>
+          <button data-route="sales/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs clients</strong><small>Retours et corrections de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Configuration</span>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>R&eacute;f&eacute;rentiels</strong><small>Familles de produits et unit&eacute;s</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>Familles de produits</strong><small>Classer les articles du catalogue</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">straighten</i><span><strong>Unit&eacute;s de mesure</strong><small>Unit&eacute;s propos&eacute;es pendant la saisie</small></span></button>
+          <button data-route="settings/numbering" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">tag</i><span><strong>Num&eacute;rotation</strong><small>Formats des documents</small></span></button>
+          <button data-route="settings/users" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">settings</i><span><strong>Paramètres</strong><small>Utilisateurs et numérotation</small></span></button>
+        </div>
+      </section>
+    </div>
+
+    <!-- FEATURE_TEMPLATES_START -->
+    <div id="design-template-host" hidden>
+<template id="material-icon-template"><span class="material-symbols-rounded" aria-hidden="true"></span></template>
+<template id="status-template"><span class="status"></span></template>
+<template id="missing-action-template"><button class="btn btn-primary" type="button" data-route><span class="material-symbols-rounded">arrow_back</span> Revenir à la liste</button></template>
+<template id="control-wrapper-template"><span class="control-enhanced"><input class="control-trigger" type="text" autocomplete="off" spellcheck="false" /><span class="material-symbols-rounded control-date-icon" aria-hidden="true">calendar_month</span></span></template>
+<template id="control-popover-template"><div class="control-popover"></div></template>
+<template id="control-option-list-template"><div class="control-option-list"></div></template>
+<template id="control-option-template"><button class="control-option" type="button" role="option"></button></template>
+<template id="control-calendar-template"><div class="control-calendar"><div class="control-calendar-head"><button class="control-calendar-nav" type="button" data-calendar-previous><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button><strong data-calendar-title></strong><button class="control-calendar-nav" type="button" data-calendar-next><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button></div><div class="control-calendar-weekdays" data-calendar-weekdays></div><div class="control-calendar-days" data-calendar-days role="grid"></div></div></template>
+<template id="control-calendar-weekday-template"><span></span></template>
+<template id="control-calendar-blank-template"><span></span></template>
+<template id="control-calendar-day-template"><button class="control-calendar-day" type="button" role="gridcell"></button></template>
+
+
+
+<template id="empty-state-template">
+  <div class="empty-state"><div><span data-empty-icon></span><h3 data-empty-title></h3><p data-empty-description></p></div></div>
+</template>
+
+<template id="api-state-template">
+  <section class="api-state">
+    <span class="api-state-icon" data-state-icon></span>
+    <div><span class="eyebrow" data-state-eyebrow></span><h1 data-state-title></h1><p data-state-description></p></div>
+    <button class="btn btn-primary" type="button" data-api-retry><span class="material-symbols-rounded">refresh</span> Réessayer</button>
+  </section>
+</template>
+
+<template id="toast-template">
+  <article class="toast">
+    <span class="toast-icon" data-toast-icon></span>
+    <span class="toast-copy"><strong data-toast-title></strong><span data-toast-message></span></span>
+    <button class="toast-close" type="button" data-toast-close aria-label="Fermer la notification"><span class="material-symbols-rounded">close</span></button>
+  </article>
+</template>
+
+<template id="collection-footer-template">
+  <footer class="collection-footer">
+    <span><strong data-footer-range></strong> <span data-footer-noun></span></span>
+    <nav class="pagination" aria-label="Pagination"><button type="button" data-page-previous aria-label="Page précédente"><span class="material-symbols-rounded">chevron_left</span></button><button class="is-active" type="button" aria-current="page" data-page-current></button><button type="button" data-page-next aria-label="Page suivante"><span class="material-symbols-rounded">chevron_right</span></button></nav>
+  </footer>
+</template>
+
+<template id="delete-dialog-template">
+  <dialog class="delete-dialog" data-delete-dialog aria-labelledby="delete-dialog-title">
+    <section class="delete-dialog-panel">
+      <header class="delete-dialog-head">
+        <span class="delete-dialog-icon"><span class="material-symbols-rounded">delete</span></span>
+        <div>
+          <span class="delete-dialog-eyebrow">Confirmation requise</span>
+          <h2 id="delete-dialog-title" data-delete-title></h2>
+        </div>
+      </header>
+      <p class="delete-dialog-message" data-delete-message></p>
+      <strong class="delete-dialog-target" data-delete-target></strong>
+      <div class="delete-dialog-note">
+        <span class="material-symbols-rounded">info</span>
+        <span>Cette action est définitive et ne peut pas être annulée.</span>
+      </div>
+      <footer class="delete-dialog-actions">
+        <button class="btn btn-secondary" type="button" data-delete-cancel>Annuler</button>
+        <button class="btn delete-dialog-confirm" type="button" data-delete-confirm>
+          <span class="material-symbols-rounded">delete</span>
+          Supprimer
+        </button>
+      </footer>
+    </section>
+  </dialog>
+</template>
+
+<template id="contact-entry-template">
+  <div class="contact-entry-form" data-contact-entry>
+    <input name="contactName" data-contact-name aria-label="Nom du contact" autocomplete="name" placeholder="Nom complet" />
+    <select name="contactRole" data-contact-role aria-label="Rôle"><option>Commercial</option><option>SAV</option></select>
+    <input name="contactPhone" data-contact-phone type="tel" inputmode="tel" aria-label="Téléphone du contact" autocomplete="tel" placeholder="Téléphone" />
+    <button class="table-icon-btn" type="button" data-remove-contact aria-label="Supprimer le contact"><span class="material-symbols-rounded">delete</span></button>
+  </div>
+</template>
+
+<div id="settings-page-view" data-static-view hidden class="view-enter settings-page">
+    <header class="page-head" data-page-header><div class="page-head-copy"><span class="eyebrow"><span data-page-icon></span><span data-page-eyebrow></span></span><h1><span data-page-title></span><span class="count-inline" data-page-count aria-hidden="true"></span></h1><p data-page-description></p></div><div class="page-head-actions"><button class="btn btn-secondary" type="button" data-page-secondary><span data-action-icon></span><span class="btn-label" data-action-label></span></button><button class="btn btn-primary" type="button" data-page-primary><span class="material-symbols-rounded">add</span><span data-action-label></span></button></div></header>
+    <nav class="settings-tabs" aria-label="Sections des paramètres">
+      <button type="button" data-settings-tab="users"><span class="material-symbols-rounded">group</span><span>Utilisateurs</span></button>
+      <button type="button" data-settings-tab="numbering"><span class="material-symbols-rounded">tag</span><span>Numérotation</span></button>
+    </nav>
+    <div class="settings-content" data-settings-content></div>
+
+    <dialog class="reference-form-dialog settings-dialog" id="settings-user-dialog" aria-labelledby="settings-user-dialog-title">
+      <form class="reference-form-dialog-panel settings-dialog-panel" data-user-form>
+        <header><span class="panel-title-icon"><span class="material-symbols-rounded">person_add</span></span><div><span class="eyebrow">Gestion des accès</span><h2 id="settings-user-dialog-title" data-user-dialog-title>Nouvel utilisateur</h2></div></header>
+        <div class="settings-dialog-fields">
+          <label class="field"><span>Adresse e-mail</span><input name="email" type="email" autocomplete="username" spellcheck="false" required /></label>
+          <label class="field" data-user-password-field><span>Mot de passe temporaire</span><span class="password-input-control" data-password-control><input name="password" data-password-input type="password" autocomplete="new-password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,100}" title="10 caractères minimum avec majuscule, minuscule, chiffre et symbole." required /><button class="password-visibility-toggle" type="button" data-password-toggle aria-label="Afficher le mot de passe" aria-pressed="false" title="Afficher le mot de passe"><span class="material-symbols-rounded" aria-hidden="true">visibility</span></button></span></label>
+          <fieldset class="settings-role-options">
+            <legend>Rôle</legend>
+            <label><input name="role" type="radio" value="Employee" checked /><span><span class="material-symbols-rounded">badge</span><strong>Employé</strong><small>Accès aux opérations courantes</small></span></label>
+            <label><input name="role" type="radio" value="Admin" /><span><span class="material-symbols-rounded">admin_panel_settings</span><strong>Administrateur</strong><small>Accès complet aux paramètres</small></span></label>
+          </fieldset>
+        </div>
+        <p class="settings-form-note"><span class="material-symbols-rounded">shield</span> Les administrateurs peuvent gérer les utilisateurs et la numérotation.</p>
+        <footer><button class="btn btn-secondary" type="button" data-user-cancel>Annuler</button><button class="btn btn-primary" type="submit" data-user-submit><span class="material-symbols-rounded">save</span><span data-user-submit-label>Créer le compte</span></button></footer>
+      </form>
+    </dialog>
+
+    <dialog class="reference-form-dialog settings-dialog" id="settings-password-dialog" aria-labelledby="settings-password-dialog-title">
+      <form class="reference-form-dialog-panel settings-dialog-panel" data-password-form>
+        <header><span class="panel-title-icon"><span class="material-symbols-rounded">key</span></span><div><span class="eyebrow">Sécurité</span><h2 id="settings-password-dialog-title">Réinitialiser le mot de passe</h2><p data-password-user></p></div></header>
+        <label class="field"><span>Nouveau mot de passe</span><span class="password-input-control" data-password-control><input name="newPassword" data-password-input type="password" autocomplete="new-password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,100}" title="10 caractères minimum avec majuscule, minuscule, chiffre et symbole." required /><button class="password-visibility-toggle" type="button" data-password-toggle aria-label="Afficher le mot de passe" aria-pressed="false" title="Afficher le mot de passe"><span class="material-symbols-rounded" aria-hidden="true">visibility</span></button></span></label>
+        <footer><button class="btn btn-secondary" type="button" data-password-cancel>Annuler</button><button class="btn btn-primary" type="submit" data-password-submit><span class="material-symbols-rounded">lock_reset</span>Mettre à jour</button></footer>
+      </form>
+    </dialog>
+
+    <dialog class="reference-form-dialog settings-dialog" id="settings-current-password-dialog" aria-labelledby="settings-current-password-dialog-title">
+      <form class="reference-form-dialog-panel settings-dialog-panel" data-current-password-form>
+        <header><span class="panel-title-icon"><span class="material-symbols-rounded">password</span></span><div><span class="eyebrow">Mon compte</span><h2 id="settings-current-password-dialog-title">Modifier mon mot de passe</h2><p>Confirmez votre mot de passe actuel avant d’enregistrer le nouveau.</p></div></header>
+        <div class="settings-dialog-fields"><label class="field"><span>Mot de passe actuel</span><span class="password-input-control" data-password-control><input name="currentPassword" data-password-input type="password" autocomplete="current-password" required /><button class="password-visibility-toggle" type="button" data-password-toggle aria-label="Afficher le mot de passe" aria-pressed="false" title="Afficher le mot de passe"><span class="material-symbols-rounded" aria-hidden="true">visibility</span></button></span></label><label class="field"><span>Nouveau mot de passe</span><span class="password-input-control" data-password-control><input name="newPassword" data-password-input type="password" autocomplete="new-password" minlength="10" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,100}" title="10 caractères minimum avec majuscule, minuscule, chiffre et symbole." required /><button class="password-visibility-toggle" type="button" data-password-toggle aria-label="Afficher le mot de passe" aria-pressed="false" title="Afficher le mot de passe"><span class="material-symbols-rounded" aria-hidden="true">visibility</span></button></span></label></div>
+        <footer><button class="btn btn-secondary" type="button" data-current-password-cancel>Annuler</button><button class="btn btn-primary" type="submit" data-current-password-submit><span class="material-symbols-rounded">save</span>Mettre à jour</button></footer>
+      </form>
+    </dialog>
+  </div>
+
+<div id="settings-users-view" data-static-view hidden class="settings-users">
+    <section class="settings-metrics" aria-label="Résumé des utilisateurs">
+      <article><span class="material-symbols-rounded">groups</span><div><small>Comptes actifs</small><strong data-user-count>0</strong></div></article>
+      <article><span class="material-symbols-rounded">admin_panel_settings</span><div><small>Administrateurs</small><strong data-admin-count>0</strong></div></article>
+      <article><span class="material-symbols-rounded">badge</span><div><small>Employés</small><strong data-employee-count>0</strong></div></article>
+    </section>
+    <section class="collection-shell settings-users-panel">
+      <header class="panel-head"><div class="panel-title"><span class="panel-title-icon"><span class="material-symbols-rounded">manage_accounts</span></span><div><h2>Équipe et accès</h2><p>Gérez les comptes autorisés à utiliser Sopmine.</p></div></div><div class="settings-user-header-actions" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><button class="btn btn-secondary" type="button" data-current-password><span class="material-symbols-rounded">key</span>Mon mot de passe</button><button class="btn btn-primary" type="button" data-create-user><span class="material-symbols-rounded">person_add</span>Nouvel utilisateur</button></div></header>
+      <div class="data-table-wrap settings-user-table-wrap">
+        <table class="data-table settings-user-table">
+          <thead><tr><th>Utilisateur</th><th>Rôle</th><th class="align-right">Actions</th></tr></thead>
+          <tbody data-user-list></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+<template id="settings-users-empty-template"><tr><td colspan="3"><div class="settings-table-empty"><span class="material-symbols-rounded" aria-hidden="true">group_off</span><strong>Aucun utilisateur</strong><small>Créez le premier compte autorisé.</small></div></td></tr></template>
+
+<template id="settings-user-row-template">
+  <tr data-user-row>
+    <td><span class="entity-cell"><span class="entity-avatar" data-user-initials></span><span class="entity-copy"><strong data-user-email></strong><small data-user-current></small></span></span></td>
+    <td><span data-user-role></span></td>
+    <td class="align-right"><span class="settings-row-actions"><button class="table-icon-btn" type="button" data-user-edit aria-label="Modifier l’utilisateur"><span class="material-symbols-rounded">edit</span></button><button class="table-icon-btn" type="button" data-user-password aria-label="Réinitialiser le mot de passe"><span class="material-symbols-rounded">key</span></button><button class="table-icon-btn danger" type="button" data-user-delete aria-label="Supprimer l’utilisateur"><span class="material-symbols-rounded">delete</span></button></span></td>
+  </tr>
+</template>
+
+<div id="settings-numbering-view" data-static-view hidden class="settings-numbering-layout">
+    <aside class="record-panel settings-nomination-directory">
+      <header class="panel-head"><div class="panel-title"><span class="panel-title-icon"><span class="material-symbols-rounded">format_list_numbered</span></span><div><h2>Types de documents</h2><p>Sélectionnez la séquence à configurer.</p></div></div></header>
+      <div class="settings-nomination-list" data-nomination-list></div>
+    </aside>
+    <form class="record-panel settings-nomination-editor" data-nomination-form>
+      <header class="panel-head"><div class="panel-title"><span class="panel-title-icon"><span class="material-symbols-rounded" data-nomination-icon>receipt_long</span></span><div><span class="eyebrow">Format de référence</span><h2 data-nomination-title>Document</h2><p>Exemple de format : le prochain numéro est attribué par le serveur.</p></div></div><strong class="settings-nomination-preview" data-nomination-preview aria-live="polite">—</strong></header>
+      <div class="settings-nomination-fields">
+        <label class="field"><span>Racine</span><input name="root" type="text" maxlength="30" required /></label>
+        <label class="field"><span>Date</span><select name="dateFormat"><option value="MM">Mois · 07</option><option value="yyMM">Année + mois · 2607</option><option value="yyyyMM">Année complète + mois · 202607</option><option value="none">Sans date</option></select></label>
+        <label class="field"><span>Taille du compteur</span><input name="incrementSize" type="number" min="1" max="8" inputmode="numeric" required /></label>
+      </div>
+      <div class="settings-nomination-explainer"><span class="material-symbols-rounded">info</span><p>La racine identifie le document. La date et le compteur sont ajoutés automatiquement lors de la création.</p></div>
+      <footer class="settings-nomination-actions"><button class="btn btn-primary" type="submit" data-nomination-save><span class="material-symbols-rounded">save</span>Enregistrer le format</button></footer>
+    </form>
+  </div>
+
+<template id="settings-nomination-group-template">
+  <section class="settings-nomination-group" aria-label="Types de documents">
+    <header class="settings-nomination-group-head">
+      <span class="settings-nomination-group-icon material-symbols-rounded" data-group-icon aria-hidden="true"></span>
+      <h3 data-group-label></h3>
+      <span class="settings-nomination-group-count"><strong data-group-count></strong> types</span>
+    </header>
+    <div class="settings-nomination-group-items" data-nomination-group-items></div>
+  </section>
+</template>
+
+<template id="settings-nomination-item-template">
+  <button class="settings-nomination-item" type="button" data-nomination-select>
+    <span class="settings-nomination-icon"><span class="material-symbols-rounded" data-nomination-item-icon></span></span>
+    <span><strong data-nomination-item-label></strong><small data-nomination-item-root></small></span>
+    <span class="mono" data-nomination-item-preview></span>
+  </button>
+</template>
+    </div>
+    <!-- FEATURE_TEMPLATES_END -->
+
+    <a id="csv-download-link" hidden></a>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+    <script src="/shared/js/runtime-config.js"></script>
+    <script src="/shared/js/api-client.js"></script>
+    <script src="/shared/js/ui-utils.js"></script>
+    <script src="/shared/js/feedback.js"></script>
+    <script src="/shared/js/auth.js?v=20260713sanitaire1"></script>
+    <script src="/shared/js/namespace.js"></script>
+    <script src="/shared/js/controls.js"></script>
+    <script src="/shared/js/dom.js"></script>
+    <script src="/shared/js/utils.js"></script>
+    <script src="/shared/js/store.js"></script>
+    <script src="/shared/js/components.js"></script>
+
+    <script src="/shared/js/api-core.js"></script>
+    <script src="/Product/Js/api.js"></script>
+    <script src="/Supplier/Js/api.js"></script>
+    <script src="/Client/Js/api.js"></script>
+    <script src="/Document/Js/api.js"></script>
+    <script src="/Reference/Js/api.js"></script>
+    <script src="/Settings/Js/api.js"></script>
+    <script src="/Product/Js/mappers.js"></script>
+    <script src="/Supplier/Js/mappers.js"></script>
+    <script src="/Client/Js/mappers.js"></script>
+
+    <script src="/Document/Js/data.js"></script>
+    <script src="/Document/Js/mappers.js"></script>
+    <script src="/Reference/Js/mappers.js"></script>
+
+    <script src="/Settings/Js/dom.js"></script>
+    <script src="/Settings/Js/form.js?v=20260801passwordeye"></script>
+    <script src="/Settings/Js/list.js"></script>
+    <script src="/Settings/Js/page.js"></script>
+
+    <script src="/shared/js/export.js"></script>
+    <script src="/shared/js/sidebar.js?v=20260803responsive-nav21"></script>
+    <script src="/shared/js/shell.js?v=20260803responsive-nav21"></script>
+    <script src="/shared/js/router.js?v=20260722d"></script>
+    <script src="/shared/js/workspace.js?v=20260722a"></script>
+    <script src="/shared/js/app.js?v=20260713a"></script>
+  </body>
+</html>

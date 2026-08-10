@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Restore .NET dependencies
+        run: dotnet restore SopmineWorkshop.slnx
+
+      - name: Build .NET solution
+        run: dotnet build SopmineWorkshop.slnx --configuration Release --no-restore --nologo
+
+      - name: Run .NET tests
+        run: dotnet test SopmineWorkshop.slnx --configuration Release --no-restore --no-build --nologo
+
+      - name: Validate frontend JavaScript syntax
+        shell: bash
+        run: |
+          mapfile -d '' files < <(find Frontend -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+          for file in "${files[@]}"; do
+            node --check "$file"
+          done

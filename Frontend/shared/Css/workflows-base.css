@@ -1,0 +1,260 @@
+/*
+ * Sopmine Design Lab — second-pass composition
+ * Feature-specific layouts, quieter information density and API-aligned UI.
+ */
+
+.pagination [data-page-current] {
+  min-width: 48px;
+  padding-inline: 8px;
+}
+
+.pagination button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.btn.is-loading {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.btn.is-loading::after {
+  content: "";
+  width: 13px;
+  height: 13px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: api-spin 650ms linear infinite;
+}
+
+.nav-family[hidden],
+.mobile-scrim[hidden] {
+  display: none !important;
+}
+
+.topbar-avatar.logout-action {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.toast--error .toast-icon {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+
+
+.prototype-note[data-status="loading"] i {
+  background: var(--warning);
+  animation: api-pulse 1.1s ease-in-out infinite;
+}
+
+.prototype-note[data-status="online"] i {
+  background: var(--success);
+  animation: api-online-breathe 2.4s ease-in-out infinite;
+}
+
+.prototype-note[data-status="error"] i {
+  background: var(--danger);
+}
+
+@keyframes api-online-breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+    box-shadow:
+      0 0 0 4px var(--success-soft),
+      0 0 3px color-mix(in srgb, var(--success) 48%, transparent);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 4px var(--success-soft),
+      0 0 10px color-mix(in srgb, var(--success) 76%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prototype-note[data-status="online"] i {
+    animation: none;
+  }
+}
+
+.api-state {
+  display: grid;
+  min-height: min(540px, calc(100vh - 130px));
+  place-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 18px;
+  padding: 40px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--brand-soft), var(--surface) 55%, color-mix(in srgb, var(--brand) 5%, var(--surface)));
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.api-state > div:not(.api-loading-lines) {
+  display: grid;
+  max-width: 560px;
+  justify-items: center;
+}
+
+.api-state h1,
+.api-state p,
+.api-state .eyebrow {
+  margin: 0;
+}
+
+.api-state h1 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: -0.045em;
+}
+
+.api-state p {
+  margin-top: 9px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.api-state-icon {
+  display: grid;
+  width: 66px;
+  height: 66px;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--brand);
+  box-shadow: var(--shadow-sm);
+}
+
+.api-state-icon .material-symbols-rounded {
+  font-size: 1.8rem;
+}
+
+.api-state--loading .api-state-icon {
+  animation: api-float 1.5s ease-in-out infinite alternate;
+}
+
+.api-state--error .api-state-icon {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.api-loading-lines {
+  display: flex;
+  gap: 6px;
+}
+
+.api-loading-lines i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  animation: api-dot 900ms ease-in-out infinite alternate;
+}
+
+.api-loading-lines i:nth-child(2) { animation-delay: 150ms; }
+.api-loading-lines i:nth-child(3) { animation-delay: 300ms; }
+
+body {
+  background:
+    radial-gradient(circle at 82% -10%, color-mix(in srgb, var(--brand) 10%, transparent), transparent 34rem),
+    radial-gradient(circle at 18% 102%, rgba(95, 170, 232, 0.08), transparent 30rem),
+    var(--canvas);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 82% -10%, rgba(36, 139, 226, 0.12), transparent 34rem),
+    radial-gradient(circle at 18% 102%, rgba(56, 110, 151, 0.08), transparent 30rem),
+    var(--canvas);
+}
+
+.workspace {
+  position: relative;
+}
+
+.page-head {
+  position: relative;
+  isolation: isolate;
+  min-height: 154px;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: clamp(20px, 2.6vw, 30px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--brand) 13%, var(--line));
+  border-radius: 19px;
+  background:
+    linear-gradient(118deg, color-mix(in srgb, var(--brand-soft) 72%, var(--surface)), var(--surface) 54%, color-mix(in srgb, var(--brand) 5%, var(--surface)));
+  box-shadow: 0 12px 35px rgba(24, 71, 104, 0.07);
+}
+
+.page-head::after {
+  position: absolute;
+  z-index: -1;
+  top: -125px;
+  right: -55px;
+  width: 285px;
+  height: 285px;
+  border: 34px solid color-mix(in srgb, var(--brand) 7%, transparent);
+  border-radius: 50%;
+  content: "";
+  animation: sopmine-orbit 13s ease-in-out infinite alternate;
+}
+
+.workspace[data-section="suppliers"] .page-head {
+  background: linear-gradient(118deg, color-mix(in srgb, var(--violet-soft) 46%, var(--surface)), var(--surface) 57%, color-mix(in srgb, var(--brand) 5%, var(--surface)));
+}
+
+.workspace[data-section="clients"] .page-head {
+  background: linear-gradient(118deg, color-mix(in srgb, var(--success-soft) 45%, var(--surface)), var(--surface) 57%, color-mix(in srgb, var(--brand) 5%, var(--surface)));
+}
+
+.workspace[data-section="purchases"] .page-head {
+  background: linear-gradient(118deg, color-mix(in srgb, var(--warning-soft) 50%, var(--surface)), var(--surface) 58%, color-mix(in srgb, var(--brand) 5%, var(--surface)));
+}
+
+.page-head-copy,
+.page-head-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.page-head h1 {
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+}
+
+.page-head p {
+  max-width: 570px;
+}
+
+.insight-strip {
+  display: none !important;
+}
+
+.collection-shell {
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  box-shadow: 0 12px 34px rgba(24, 71, 104, 0.055);
+  backdrop-filter: none;
+}
+
+.collection-toolbar {
+  min-height: 62px;
+}
+
+.collection-context {
+  color: var(--muted);
+  font-family: var(--font-data);
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
+
+.workspace[data-section="products"] .active-filter-row {
+  display: none;
+}

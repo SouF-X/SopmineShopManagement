@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="fr" data-theme="light" data-feature="document">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0775d7" />
+    <title>Sopmine &#x2014; Documents</title>
+    <link rel="stylesheet" href="/shared/Css/fonts.css?v=20260802offline" />
+    <link rel="stylesheet" href="/shared/Css/style.css?v=20260805mobile-article1" />
+    <link rel="stylesheet" href="/shared/Css/workflows-base.css?v=20260729online" />
+    <link rel="stylesheet" href="/Document/Css/document.css?v=20260805record-actions-square2" />
+    <link rel="stylesheet" href="/shared/Css/workflows-shared.css?v=20260722i" />
+    <link rel="stylesheet" href="/shared/Css/sanitaire.css?v=20260805bl-fast5" />
+  </head>
+  <body data-default-route="purchases/boncommande">
+    <a class="skip-link" href="#workspace">Aller au contenu principal</a>
+    <div class="app-frame">
+      <aside class="sidebar" id="sidebar" aria-label="Navigation principale"></aside>
+
+      <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+
+      <section class="app-stage">
+        <header class="topbar">
+          <div class="topbar-start">
+            <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Afficher ou masquer la navigation" aria-controls="sidebar" aria-expanded="false">
+              <span class="material-symbols-rounded">menu</span>
+            </button>
+            <div class="breadcrumbs" id="breadcrumbs"><span data-breadcrumb-main>Achats</span><i>/</i><strong data-breadcrumb-section>Bons de commande</strong><i data-breadcrumb-detail-separator hidden>/</i><strong data-breadcrumb-detail hidden></strong></div>
+          </div>
+
+          <div class="topbar-end">
+            <button class="command-trigger" id="command-trigger" type="button" aria-controls="command-layer" aria-expanded="false">
+              <span class="material-symbols-rounded">search</span>
+              <span>Rechercher partout</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+            <button class="icon-button" id="theme-toggle" type="button" aria-label="Changer le th&#xe8;me">
+              <span class="material-symbols-rounded">dark_mode</span>
+            </button>
+            <button class="icon-button notification-button" type="button" aria-label="Notifications">
+              <span class="material-symbols-rounded">notifications</span><i></i>
+            </button>
+            <button class="topbar-avatar profile-menu-trigger" id="topbar-profile" type="button" aria-label="Ouvrir le menu du profil" aria-haspopup="menu" aria-controls="profile-menu" aria-expanded="false">SB</button>
+          </div>
+        </header>
+
+        <main class="workspace" id="workspace" tabindex="-1"></main>
+      </section>
+    </div>
+
+    <div class="profile-menu" id="profile-menu" role="menu" aria-hidden="true" aria-label="Menu du profil">
+      <div class="profile-menu-head">
+        <span class="profile-menu-avatar">SB</span>
+        <span><strong class="profile-menu-name">Utilisateur</strong><small class="profile-menu-role">Compte Sopmine</small></span>
+      </div>
+      <button type="button" role="menuitem" data-profile-action="settings" data-admin-only><span class="material-symbols-rounded">settings</span><span>Param&#xe8;tres</span></button>
+      <div class="profile-menu-divider"></div>
+      <button class="profile-menu-danger" type="button" role="menuitem" data-profile-action="logout"><span class="material-symbols-rounded">logout</span><span>D&#xe9;connexion</span></button>
+    </div>
+
+    <div class="command-layer" id="command-layer" aria-hidden="true">
+      <button class="command-backdrop" type="button" data-command-close aria-label="Fermer"></button>
+      <section class="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
+        <div class="command-search">
+          <span class="material-symbols-rounded">search</span>
+          <input id="command-input" name="commandSearch" autocomplete="off" aria-label="Rechercher une page ou une action" placeholder="Rechercher une page ou une action&#x2026;" />
+          <kbd>Esc</kbd>
+        </div>
+        <div class="command-content">
+          <span class="command-label" id="command-title">Navigation rapide</span>
+          <button data-route="products" type="button"><i class="material-symbols-rounded">bathroom</i><span><strong>Produits</strong><small>Catalogue sanitaire et niveaux de stock</small></span><kbd>P</kbd></button>
+          <button data-route="suppliers" type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Fournisseurs</strong><small>Marques, distributeurs et contacts</small></span></button>
+          <button data-route="clients" type="button"><i class="material-symbols-rounded">person</i><span><strong>Clients</strong><small>Comptoir, professionnels et particuliers</small></span></button>
+          <button data-route="purchase-new" type="button"><i class="material-symbols-rounded">add_shopping_cart</i><span><strong>Nouveau bon de commande</strong><small>Cr&#xe9;er un document d&#x2019;achat</small></span></button>
+          <button data-route="sale-new" type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Nouveau devis</strong><small>Cr&#xe9;er un document de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Toutes les fonctionnalit&#xe9;s</span>
+          <button data-route="dashboard" data-command-search-only hidden type="button"><i class="material-symbols-rounded">space_dashboard</i><span><strong>Tableau de bord</strong><small>Activit&eacute;, priorit&eacute;s et indicateurs</small></span></button>
+          <button data-route="product-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">add_box</i><span><strong>Nouveau produit</strong><small>Ajouter un article au catalogue</small></span></button>
+          <button data-route="supplier-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau fournisseur</strong><small>Ajouter un partenaire d&#x2019;achat</small></span></button>
+          <button data-route="client-new" data-command-search-only hidden type="button"><i class="material-symbols-rounded">person_add</i><span><strong>Nouveau client</strong><small>Ajouter un partenaire de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Achats</span>
+          <button data-route="purchases/boncommande" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Bons de commande</strong><small>Pr&eacute;parer un achat fournisseur</small></span></button>
+          <button data-route="purchases/bonreception" data-command-search-only hidden type="button"><i class="material-symbols-rounded">inventory</i><span><strong>Bons de r&eacute;ception</strong><small>Entr&eacute;es en stock &middot; BL fournisseur</small></span></button>
+          <button data-route="purchases/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures fournisseurs</strong><small>Factures d&#x2019;achat &middot; r&egrave;glements</small></span></button>
+          <button data-route="purchases/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs fournisseurs</strong><small>Retours et corrections d&#x2019;achat</small></span></button>
+          <button data-route="purchases/lecture-ia" data-command-search-only hidden type="button"><i class="material-symbols-rounded">document_scanner</i><span><strong>Lecture IA</strong><small>Scanner un document fournisseur</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Ventes</span>
+          <button data-route="sales/devis" data-command-search-only hidden type="button"><i class="material-symbols-rounded">request_quote</i><span><strong>Devis</strong><small>Pr&eacute;parer une vente</small></span></button>
+          <button data-route="sales/bonlivraison" data-command-search-only hidden type="button"><i class="material-symbols-rounded">local_shipping</i><span><strong>Bons de livraison</strong><small>Sorties de stock client</small></span></button>
+          <button data-route="sales/facture" data-command-search-only hidden type="button"><i class="material-symbols-rounded">receipt_long</i><span><strong>Factures clients</strong><small>Ventes factur&eacute;es &middot; r&egrave;glements</small></span></button>
+          <button data-route="sales/avoir" data-command-search-only hidden type="button"><i class="material-symbols-rounded">assignment_return</i><span><strong>Avoirs clients</strong><small>Retours et corrections de vente</small></span></button>
+          <span class="command-label" data-command-search-only hidden>Configuration</span>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>R&eacute;f&eacute;rentiels</strong><small>Familles de produits et unit&eacute;s</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">category</i><span><strong>Familles de produits</strong><small>Classer les articles du catalogue</small></span></button>
+          <button data-route="references" data-command-search-only hidden type="button"><i class="material-symbols-rounded">straighten</i><span><strong>Unit&eacute;s de mesure</strong><small>Unit&eacute;s propos&eacute;es pendant la saisie</small></span></button>
+          <button data-route="settings/numbering" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">tag</i><span><strong>Num&eacute;rotation</strong><small>Formats des documents</small></span></button>
+          <button data-route="settings/users" data-admin-only data-command-search-only hidden type="button"><i class="material-symbols-rounded">settings</i><span><strong>Param&#xe8;tres</strong><small>Utilisateurs et num&#xe9;rotation</small></span></button>
+        </div>
+      </section>
+    </div>
+
+    <!-- FEATURE_TEMPLATES_START -->
+    <div id="design-template-host" hidden>
+<template id="material-icon-template"><span class="material-symbols-rounded" aria-hidden="true"></span></template>
+<template id="status-template"><span class="status"></span></template>
+<template id="missing-action-template"><button class="btn btn-primary" type="button" data-route><span class="material-symbols-rounded">arrow_back</span> Revenir &#xe0; la liste</button></template>
+<template id="control-wrapper-template"><span class="control-enhanced"><input class="control-trigger" type="text" autocomplete="off" spellcheck="false" /><span class="material-symbols-rounded control-date-icon" aria-hidden="true">calendar_month</span></span></template>
+<template id="control-popover-template"><div class="control-popover"></div></template>
+<template id="control-option-list-template"><div class="control-option-list"></div></template>
+<template id="control-option-template"><button class="control-option" type="button" role="option"></button></template>
+<template id="control-calendar-template"><div class="control-calendar"><div class="control-calendar-head"><button class="control-calendar-nav" type="button" data-calendar-previous><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span></button><strong data-calendar-title></strong><button class="control-calendar-nav" type="button" data-calendar-next><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button></div><div class="control-calendar-weekdays" data-calendar-weekdays></div><div class="control-calendar-days" data-calendar-days role="grid"></div></div></template>
+<template id="control-calendar-weekday-template"><span></span></template>
+<template id="control-calendar-blank-template"><span></span></template>
+<template id="control-calendar-day-template"><button class="control-calendar-day" type="button" role="gridcell"></button></template>
+
+
+
+<template id="empty-state-template">
+  <div class="empty-state"><div><span data-empty-icon></span><h3 data-empty-title></h3><p data-empty-description></p></div></div>
+</template>
+
+<template id="api-state-template">
+  <section class="api-state">
+    <span class="api-state-icon" data-state-icon></span>
+    <div><span class="eyebrow" data-state-eyebrow></span><h1 data-state-title></h1><p data-state-description></p></div>
+    <button class="btn btn-primary" type="button" data-api-retry><span class="material-symbols-rounded">refresh</span> R&#xe9;essayer</button>
+  </section>
+</template>
+
+<template id="toast-template">
+  <article class="toast">
+    <span class="toast-icon" data-toast-icon></span>
+    <span class="toast-copy"><strong data-toast-title></strong><span data-toast-message></span></span>
+    <button class="toast-close" type="button" data-toast-close aria-label="Fermer la notification"><span class="material-symbols-rounded">close</span></button>
+  </article>
+</template>
+
+<template id="collection-footer-template">
+  <footer class="collection-footer">
+    <span><strong data-footer-range></strong> <span data-footer-noun></span></span>
+    <nav class="pagination" aria-label="Pagination"><button type="button" data-page-previous aria-label="Page pr&#xe9;c&#xe9;dente"><span class="material-symbols-rounded">chevron_left</span></button><button class="is-active" type="button" aria-current="page" data-page-current></button><button type="button" data-page-next aria-label="Page suivante"><span class="material-symbols-rounded">chevron_right</span></button></nav>
+  </footer>
+</template>
+
+<template id="delete-dialog-template">
+  <dialog class="delete-dialog" data-delete-dialog aria-labelledby="delete-dialog-title">
+    <section class="delete-dialog-panel">
+      <header class="delete-dialog-head">
+        <span class="delete-dialog-icon"><span class="material-symbols-rounded">delete</span></span>
+        <div>
+          <span class="delete-dialog-eyebrow">Confirmation requise</span>
+          <h2 id="delete-dialog-title" data-delete-title></h2>
+        </div>
+      </header>
+      <p class="delete-dialog-message" data-delete-message></p>
+      <strong class="delete-dialog-target" data-delete-target></strong>
+      <div class="delete-dialog-note">
+        <span class="material-symbols-rounded">info</span>
+        <span>Cette action est d&#xe9;finitive et ne peut pas &#xea;tre annul&#xe9;e.</span>
+      </div>
+      <footer class="delete-dialog-actions">
+        <button class="btn btn-secondary" type="button" data-delete-cancel>Annuler</button>
+        <button class="btn delete-dialog-confirm" type="button" data-delete-confirm>
+          <span class="material-symbols-rounded">delete</span>
+          Supprimer
+        </button>
+      </footer>
+    </section>
+  </dialog>
+</template>
+
+<template id="contact-entry-template">
+  <div class="contact-entry-form" data-contact-entry>
+    <input name="contactName" data-contact-name aria-label="Nom du contact" autocomplete="name" placeholder="Nom complet" />
+    <select name="contactRole" data-contact-role aria-label="R&#xf4;le"><option>Commercial</option><option>SAV</option></select>
+    <input name="contactPhone" data-contact-phone type="tel" inputmode="tel" aria-label="T&#xe9;l&#xe9;phone du contact" autocomplete="tel" placeholder="T&#xe9;l&#xe9;phone" />
+    <button class="table-icon-btn" type="button" data-remove-contact aria-label="Supprimer le contact"><span class="material-symbols-rounded">delete</span></button>
+  </div>
+</template>
+
+<div id="documents-page-view" data-static-view hidden class="view-enter"><header class="page-head" data-page-header><div class="page-head-copy"><span class="eyebrow"><span data-page-icon></span><span data-page-eyebrow></span></span><h1><span data-page-title></span><span class="count-inline" data-page-count aria-hidden="true"></span></h1><p data-page-description></p></div><div class="page-head-actions"><button class="btn btn-secondary" type="button" data-page-secondary><span data-action-icon></span><span class="btn-label" data-action-label></span></button><button class="btn btn-primary" type="button" data-page-primary><span class="material-symbols-rounded">add</span><span data-action-label></span></button></div></header><nav class="document-type-navigation" data-document-navigation></nav><section class="collection-shell focused-documents"><div class="collection-toolbar"><div class="toolbar-start"><label class="search-field"><span class="material-symbols-rounded">search</span><input name="documentSearch" data-document-search aria-label="Rechercher un document" placeholder="Rechercher une r&#xe9;f&#xe9;rence ou un partenaire&#x2026;" /></label><div class="filter-row"><select class="compact-select" name="documentPeriod" data-document-period aria-label="Filtrer par p&#xe9;riode"><option value="">Toutes les p&#xe9;riodes</option><option value="week">Cette semaine</option><option value="month">Ce mois</option></select><select class="compact-select" name="documentStatus" data-document-status aria-label="Filtrer par statut"><option value="">Tous les statuts</option><option>Brouillon</option><option>Valid&#xe9;</option><option>Pay&#xe9;</option><option>Annul&#xe9;</option></select></div></div><div class="toolbar-actions"><span class="collection-context" data-document-total></span></div></div><div class="data-table-wrap"><table class="data-table"><colgroup><col class="doc-col-reference" /><col class="doc-col-partner" /><col class="doc-col-date" /><col class="doc-col-status" /><col class="doc-col-total" /><col class="doc-col-action" /></colgroup><thead><tr><th>R&#xe9;f&#xe9;rence</th><th data-partner-heading></th><th>Date / &#xe9;ch&#xe9;ance</th><th>Statut</th><th class="align-right">Total</th><th></th></tr></thead><tbody data-document-list></tbody></table></div><div data-document-footer></div></section></div>
+
+<div id="invoice-ai-workspace-view" data-static-view hidden class="view-enter invoice-ai-workspace">
+  <header class="page-head invoice-ai-page-head">
+    <div class="page-head-copy"><span class="eyebrow"><span class="material-symbols-rounded">document_scanner</span> Achats assist&#xe9;s</span><h1>Lecture IA d&#x2019;achat</h1><p>Importez un document fournisseur, v&#xe9;rifiez les donn&#xe9;es extraites puis confirmez-le avec le processus d&#x2019;achat habituel.</p></div>
+  </header>
+  <nav class="document-type-navigation" data-document-navigation aria-label="Sections achats"></nav>
+  <section class="invoice-ai-wizard" data-ai-wizard aria-live="polite">
+    <nav class="invoice-ai-progress" aria-label="Progression de l&#x2019;import fournisseur" data-ai-progress></nav>
+    <div class="invoice-ai-stage" data-ai-stage></div>
+    <input type="file" accept="image/png,image/jpeg,image/webp" hidden data-ai-file />
+  </section>
+</div>
+
+<template id="delivery-conversion-action-template"><button class="btn btn-secondary" type="button" data-delivery-convert><span class="material-symbols-rounded">receipt_long</span> Convertir en facture</button></template>
+
+<template id="delivery-conversion-dialog-template">
+  <dialog class="delivery-conversion-drawer" data-delivery-dialog aria-labelledby="delivery-conversion-title">
+    <form class="delivery-conversion-panel" method="dialog" data-delivery-form>
+      <header class="delivery-conversion-header">
+        <div>
+          <p class="eyebrow">Ventes</p>
+          <h2 id="delivery-conversion-title">Convertir en facture</h2>
+          <p data-delivery-step-copy>Choisissez d’abord le client à facturer.</p>
+        </div>
+        <button type="button" class="icon-button" data-cancel aria-label="Fermer">×</button>
+      </header>
+
+      <section data-delivery-client-picker>
+        <label class="delivery-conversion-search">
+          <span>Rechercher un client</span>
+          <input type="search" data-delivery-search placeholder="Nom, téléphone ou adresse" autocomplete="off">
+        </label>
+        <div class="delivery-conversion-list" data-delivery-client-grid></div>
+      </section>
+
+      <section data-delivery-bl-picker hidden>
+        <div class="delivery-client-group">
+          <header>
+            <div class="delivery-client-identity">
+              <span class="delivery-client-avatar" data-delivery-selected-client-initials aria-hidden="true"></span>
+              <div>
+                <strong data-delivery-selected-client-name></strong>
+                <span data-delivery-selected-client-meta></span>
+              </div>
+            </div>
+            <button type="button" class="button button-secondary" data-delivery-change-client>Changer de client</button>
+          </header>
+
+          <label class="delivery-select-all">
+            <input type="checkbox" data-delivery-select-all>
+            <span>Sélectionner tous les BL</span>
+          </label>
+          <div class="delivery-client-rows" data-delivery-list></div>
+        </div>
+      </section>
+
+      <section class="delivery-conversion-summary" data-delivery-summary hidden>
+        <div class="delivery-bl-preview" data-delivery-preview>
+          <span>Client</span>
+          <strong data-delivery-selection-client></strong>
+          <span data-delivery-selection-count>0 BL sélectionné</span>
+          <strong data-delivery-selection-total>0,00 MAD</strong>
+        </div>
+      </section>
+
+      <footer class="delivery-conversion-actions">
+        <button type="button" class="button button-secondary" data-cancel>Annuler</button>
+        <button type="submit" class="button button-primary" data-confirm disabled>Convertir en facture</button>
+      </footer>
+    </form>
+  </dialog>
+</template>
+
+<template id="delivery-conversion-client-card-template"><button class="delivery-client-card" type="button" data-delivery-client-card><span class="delivery-client-card-head"><span class="entity-avatar client" data-delivery-client-initials></span><span class="delivery-client-card-copy"><strong data-delivery-client-name></strong><small data-delivery-client-meta></small></span></span><span class="delivery-client-card-metrics"><span><small>Bons &#xe0; facturer</small><strong data-delivery-client-count></strong></span><span><small>Montant en attente</small><strong data-delivery-client-total></strong></span></span><span class="delivery-client-card-action">Voir les BL <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span></button></template>
+
+<template id="delivery-conversion-row-template"><label class="delivery-conversion-row"><input type="checkbox" data-delivery-checkbox /><span class="delivery-row-reference"><strong data-delivery-reference></strong><small data-delivery-date></small></span><strong class="delivery-row-amount" data-delivery-amount></strong></label></template>
+
+<template id="document-empty-row-template"><tr><td colspan="6" data-document-empty-cell></td></tr></template>
+
+<template id="document-flow-step-template"><article class="flow-step"><span class="flow-step-icon"><span class="material-symbols-rounded" data-step-icon></span></span><span class="flow-step-copy"><strong data-step-title></strong><span data-step-text></span></span></article></template>
+
+<template id="document-missing-action-template"><button class="btn btn-primary" type="button" data-route><span class="material-symbols-rounded">add</span> Cr&#xe9;er maintenant</button></template>
+
+<template id="document-nav-template">
+  <button type="button" data-route><span class="material-symbols-rounded" data-nav-icon></span><span><strong data-nav-title></strong><small data-nav-count></small></span></button>
+</template>
+
+<template id="document-row-template">
+  <tr data-open><td class="entity-primary"><span class="entity-copy"><strong class="mono" data-document-reference></strong><small data-document-type></small></span></td><td class="mobile-fact" data-label="Partenaire"><div class="entity-cell"><span class="entity-avatar" data-partner-initials></span><span class="entity-copy"><strong data-partner-name></strong><small data-partner-city></small></span></div></td><td class="mobile-fact" data-label="Date"><span data-document-date></span><span class="sub-value" data-document-due></span></td><td class="mobile-fact" data-label="Statut"><span data-document-status></span><span class="sub-value" data-payment-status></span></td><td class="align-right mobile-fact" data-label="Total"><span class="amount" data-document-total></span><span class="sub-value">TTC</span></td><td class="action-col"><button class="table-icon-btn" type="button" data-route aria-label="Ouvrir le document"><span class="material-symbols-rounded">arrow_forward</span></button></td></tr>
+</template>
+
+
+
+<div id="document-detail-view" data-static-view hidden class="view-enter"><button class="back-link" type="button" data-back><span class="material-symbols-rounded">arrow_back</span> Retour &#xe0; la liste</button><section class="record-hero"><div class="record-identity"><span class="record-monogram" data-document-icon><span class="material-symbols-rounded">receipt_long</span></span><div class="record-heading"><span class="eyebrow" data-document-type></span><h1 class="record-title mono" data-document-reference></h1><div class="record-meta"><span data-document-status></span><span class="meta-chip" data-partner-name></span><span class="meta-chip" data-document-date></span></div></div></div><div class="record-actions"><button class="btn btn-secondary" type="button" data-print><span class="material-symbols-rounded">print</span><span class="btn-label">Imprimer / PDF</span></button><label class="print-option" hidden data-print-two-copies><input name="printTwoCopies" type="checkbox" data-print-two-copies-toggle /><span>2 copies</span></label><label class="print-option" hidden data-print-signature><input name="printSignature" type="checkbox" data-print-signature-toggle /><span>Afficher la signature</span></label><div class="print-totals-control" hidden data-print-totals-mode-control><span class="material-symbols-rounded" aria-hidden="true">calculate</span><select class="compact-select" data-searchable="false" data-popover-anchor="parent" data-print-totals-mode aria-label="Affichage des totaux"><option value="detailed">Totaux d&#xe9;taill&#xe9;s</option><option value="total">Total TTC</option><option value="hidden">Totaux masqu&#xe9;s</option></select></div><button class="btn btn-secondary" type="button" data-record-payment hidden><span class="material-symbols-rounded">payments</span><span class="btn-label">R&egrave;glement</span></button><button class="btn btn-primary" type="button" data-edit><span class="material-symbols-rounded">edit</span><span class="btn-label">Modifier</span></button><button class="btn btn-secondary btn-square" type="button" data-delete aria-label="Supprimer le document"><span class="material-symbols-rounded">delete</span></button></div></section><section class="flow-track status-track" data-status-track></section><iframe id="client-pdf-print-frame" src="/Document/print.html?v=20260808twocopyfix" title="Impression facture Sopmine" hidden></iframe><div class="document-layout"><div class="document-paper-shell"><iframe data-document-preview-frame src="/Document/print.html?v=20260808twocopyfix" title="Aper&#xe7;u facture Sopmine"></iframe><article class="document-paper"><header class="paper-head"><div class="paper-brand"><span class="paper-logo"><img src="/shared/assets/sopmine-logo.jpeg" alt="" width="982" height="1079" /></span><span><strong>Sopmine</strong><span>Sanitaire &#xb7; Salle de bain &#xb7; Traitement de l&#x2019;eau</span></span></div><div class="paper-document-title"><strong data-document-type></strong><span data-document-reference></span></div></header><section class="paper-parties"><div class="paper-party"><span>&#xc9;metteur</span><strong>Sopmine SARL</strong><small>Casablanca, Maroc</small></div><div class="paper-party"><span data-partner-label></span><strong data-partner-name></strong><small data-partner-address></small></div></section><table class="paper-table"><thead><tr><th>D&#xe9;signation</th><th>Qt&#xe9;</th><th>Prix unit.</th><th>Total HT</th></tr></thead><tbody data-paper-lines></tbody></table><div class="paper-totals"><div class="paper-total-row"><span>Total HT</span><strong data-subtotal></strong></div><div class="paper-total-row"><span>Total TVA</span><strong data-tax></strong></div><div class="paper-total-row grand"><span>Total TTC</span><strong data-total></strong></div></div></article></div><aside class="document-side"><section class="record-panel record-panel-details"><header class="panel-head"><div class="panel-title"><span class="panel-title-icon"><span class="material-symbols-rounded">info</span></span><div><h2>D&#xe9;tails du document</h2><p>Informations essentielles</p></div></div></header><div class="panel-body"><div class="panel-body"><div class="summary-list"><div class="summary-row"><span>Statut</span><strong data-side-status></strong></div><div class="summary-row"><span>Paiement</span><strong data-payment-status></strong></div><div class="summary-row"><span>Moyen</span><strong data-payment-method></strong></div><div class="summary-row"><span>Date</span><strong data-document-date></strong></div><div class="summary-row"><span>&#xc9;ch&#xe9;ance</span><strong data-document-due></strong></div><div class="summary-row"><span>Total TTC</span><strong class="mono" data-total></strong></div></div></div></section><section class="preview-fields-card"><header class="preview-fields-head"><span class="preview-fields-head-icon"><span class="material-symbols-rounded" aria-hidden="true">view_column</span></span><div><strong>Colonnes de l'aper&#xe7;u</strong><small>Choisissez ce qui s'imprime</small></div></header><div class="preview-fields-list"><label class="preview-field-row" data-preview-field="reference"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">tag</span></span><span class="preview-field-row-label">R&#xe9;f&#xe9;rence</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="family"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">category</span></span><span class="preview-field-row-label">Famille</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="unit"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">straighten</span></span><span class="preview-field-row-label">Unit&#xe9;</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="vat"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">percent</span></span><span class="preview-field-row-label">TVA</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="priceHt"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">payments</span></span><span class="preview-field-row-label">Prix HT</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="priceTtc"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">price_check</span></span><span class="preview-field-row-label">Prix TTC</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="margin"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">trending_up</span></span><span class="preview-field-row-label">Marge</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="totalHt"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">calculate</span></span><span class="preview-field-row-label">Total HT</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label><label class="preview-field-row" data-preview-field="totalTtc"><span class="preview-field-row-icon"><span class="material-symbols-rounded" aria-hidden="true">receipt_long</span></span><span class="preview-field-row-label">Total TTC</span><input type="checkbox" checked /><span class="preview-field-switch" aria-hidden="true"></span></label></div></section><section class="record-panel payments-panel" data-payments-panel hidden></section></aside></div></div>
+
+<template id="document-paper-line-template">
+  <tr><td><strong data-line-name></strong><small data-line-reference></small></td><td data-line-quantity></td><td data-line-price></td><td data-line-total></td></tr>
+</template>
+
+<div id="document-form-view" data-static-view hidden class="view-enter"><button class="back-link" type="button" data-back><span class="material-symbols-rounded">arrow_back</span> Retour &#xe0; la liste</button><form data-document-form><header class="form-page-head"><div><span class="eyebrow"><span class="material-symbols-rounded" data-form-icon></span><span data-form-eyebrow></span></span><h1 class="form-title" data-form-title></h1><p class="form-subtitle" data-form-subtitle>Saisissez les articles et contr&#xf4;lez les totaux rapidement.</p></div><div class="form-actions"><button class="btn btn-secondary" type="button" data-back>Annuler</button><button class="btn btn-primary" type="submit"><span class="material-symbols-rounded">check</span><span data-submit-label></span></button></div></header><div class="form-layout"><div class="document-editor"><section class="form-section"><header class="form-section-head"><span class="material-symbols-rounded">business</span><div><h2 data-partner-title></h2><p>Informations g&#xe9;n&#xe9;rales du document</p></div></header><div class="form-fields cols-3"><label class="field"><span data-partner-label></span><select name="partner" required></select></label><label class="field"><span>Date du document</span><input name="date" type="date" required /></label><label class="field document-due-date-field"><span>&#xc9;ch&#xe9;ance</span><input name="dueDate" type="date" /></label><label class="field document-reference-field"><span>R&#xe9;f&#xe9;rence</span><input name="reference" class="mono" /></label><label class="field document-status-field"><span>Statut</span><select name="status"><option value="0">Brouillon</option><option value="1">Valid&#xe9;</option><option value="3">Annul&#xe9;</option></select></label></div></section><section class="form-section document-lines-section"><header class="form-section-head"><span class="material-symbols-rounded">list_alt</span><div><h2>Articles</h2><p data-lines-helper>Quantit&#xe9;s, prix unitaires et taxes</p></div></header><div class="panel-body"><div class="line-editor"><div class="line-editor-scroll" data-line-list></div></div><button class="add-line" type="button" data-add-line><span class="add-line-icon"><span class="material-symbols-rounded">add</span></span><span><strong>Ajouter un article</strong><small data-add-line-help>S&#xe9;lectionnez un produit puis ajustez quantit&#xe9;, prix et taxes.</small></span><span class="add-line-mark">+</span></button></div></section><section class="form-section"><header class="form-section-head"><span class="material-symbols-rounded">notes</span><div><h2>Note</h2><p>Information visible sur le document</p></div></header><div class="form-fields"><label class="field full"><span>Note</span><textarea name="notes"></textarea></label></div></section></div><aside class="form-aside"><section class="summary-card"><header class="summary-card-head"><h3>R&#xe9;sum&#xe9; du document</h3><p>Calcul automatique &#xe0; partir des lignes.</p></header><div class="form-summary"><div class="form-summary-row"><span>Sous-total HT</span><strong data-subtotal></strong></div><div class="form-summary-row"><span>TVA</span><strong data-tax></strong></div><div class="form-summary-row total"><span>Total TTC</span><strong data-total></strong></div></div><div class="form-aside-actions"><button class="btn btn-primary" type="submit"><span class="material-symbols-rounded">check</span><span data-submit-label></span></button></div></section></aside></div></form></div>
+
+<template id="document-line-template">
+  <article class="line-editor-row" data-line><div class="line-editor-main"><label class="line-editor-field line-editor-product"><span>Produit</span><select name="lineProduct" data-line-product data-search-placeholder="Rechercher un produit ou une r&#xe9;f&#xe9;rence&#x2026;" aria-label="Produit"></select></label><label class="line-editor-field line-editor-quantity"><span>Quantit&#xe9;</span><input name="lineQuantity" data-line-quantity type="number" min="0.001" step="any" inputmode="decimal" aria-label="Quantit&#xe9;" /></label><label class="line-editor-field line-editor-price-ht"><span data-line-price-label>Prix HT</span><input name="linePrice" data-line-price type="number" min="0" step="0.01" aria-label="Prix hors taxes" /></label><label class="line-editor-grand-total line-editor-price-ttc"><span>Prix vente TTC</span><input name="linePriceTtc" data-line-price-ttc type="number" min="0" step="0.01" aria-label="Prix toutes taxes comprises" /></label><button class="table-icon-btn line-editor-remove" type="button" data-remove-line aria-label="Supprimer la ligne"><span class="material-symbols-rounded">delete</span></button></div><div class="line-editor-meta"><div data-line-field="reference"><span>R&#xe9;f&#xe9;rence</span><strong class="mono" data-line-reference>&#x2014;</strong></div><label data-line-field="family"><span>Famille</span><select name="lineFamily" data-line-family class="compact-select" data-search-placeholder="Rechercher une famille" aria-label="Famille"></select></label><div data-line-field="unit"><span>Unit&#xe9;</span><strong data-line-unit>&#x2014;</strong></div><label data-line-field="vat"><span>TVA</span><input name="lineVat" data-line-vat type="number" min="0" step="0.01" aria-label="TVA" /></label><div data-line-field="margin"><span>Marge</span><strong data-line-margin>&#x2014;</strong></div><div data-line-field="totalHt"><span>Total HT</span><strong class="mono" data-line-total></strong></div><div class="line-editor-total-ttc-meta"><span>Total TTC</span><strong class="mono" data-line-total-ttc>&#x2014;</strong></div></div></article>
+</template>
+    </div>
+    <!-- FEATURE_TEMPLATES_END -->
+
+    <a id="csv-download-link" hidden></a>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+    <script src="/shared/js/runtime-config.js"></script>
+    <script src="/shared/js/api-client.js"></script>
+    <script src="/shared/js/ui-utils.js"></script>
+    <script src="/shared/js/feedback.js"></script>
+    <script src="/shared/js/auth.js?v=20260713sanitaire1"></script>
+    <script src="/shared/js/namespace.js"></script>
+    <script src="/shared/js/controls.js"></script>
+    <script src="/shared/js/dom.js"></script>
+    <script src="/shared/js/utils.js"></script>
+    <script src="/shared/js/store.js"></script>
+    <script src="/shared/js/components.js"></script>
+
+    <script src="/shared/js/api-core.js"></script>
+    <script src="/Product/Js/api.js"></script>
+    <script src="/Supplier/Js/api.js"></script>
+    <script src="/Client/Js/api.js"></script>
+    <script src="/Document/Js/api.js?v=20260803supplier-scan"></script>
+    <script src="/Reference/Js/api.js"></script>
+    <script src="/Product/Js/mappers.js"></script>
+    <script src="/Supplier/Js/mappers.js"></script>
+    <script src="/Client/Js/mappers.js"></script>
+
+    <script src="/Document/Js/data.js?v=20260803supplier-scan"></script>
+    <script src="/Document/Js/dom.js?v=20260722ai"></script>
+    <script src="/Document/Js/mappers.js?v=20260803supplier-scan"></script>
+    <script src="/Document/Js/payments.js?v=20260729convertedbl"></script>
+    <script src="/Document/Js/extraction.js?v=20260803supplier-scan"></script>
+    <script src="/Document/Js/validators.js"></script>
+    <script src="/Document/Js/print.js?v=20260803a4preview"></script>
+    <script src="/Document/Js/list.js?v=20260801optionalfilter"></script>
+    <script src="/Document/Js/form.js?v=20260805bl-fast3"></script>
+    <script src="/Document/Js/ai-workspace.js?v=20260803supplier-scan"></script>
+    <script src="/Document/Js/page.js?v=20260722ai"></script>
+    <script src="/Reference/Js/mappers.js"></script>
+
+    <script src="/shared/js/export.js"></script>
+    <script src="/shared/js/sidebar.js?v=20260803responsive-nav21"></script>
+    <script src="/shared/js/shell.js?v=20260803responsive-nav21"></script>
+    <script src="/shared/js/router.js?v=20260722d"></script>
+    <script src="/shared/js/workspace.js?v=20260722a"></script>
+    <script src="/shared/js/app.js?v=20260713a"></script>
+  </body>
+</html>

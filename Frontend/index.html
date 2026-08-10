@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sopmine - Redirection</title>
+    <script src="/shared/js/runtime-config.js"></script>
+    <script src="/shared/js/api-client.js?v=20260511drafts1"></script>
+    <script src="/shared/js/auth.js?v=20260506roles2"></script>
+    <script>
+      (() => {
+        const currentUrl = new URL(window.location.href);
+        const targetPath = window.SopmineAuth?.hasValidSession()
+          ? "/Dashboard/"
+          : "/Login/";
+        const targetUrl = new URL(targetPath, currentUrl);
+        window.location.replace(targetUrl.toString());
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
