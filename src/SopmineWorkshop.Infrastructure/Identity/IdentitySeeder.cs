@@ -107,7 +107,6 @@ public sealed class IdentitySeeder(
                     return;
                 }
             }
-
         }
 
         if (!await _userManager.IsInRoleAsync(user, role))

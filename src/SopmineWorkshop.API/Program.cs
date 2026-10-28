@@ -1,5 +1,4 @@
 using System.IO.Compression;
-using System.Text;
 using System.Threading.RateLimiting;
 
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 var allowedCorsOrigins = GetConfiguredOrigins(builder.Configuration, "Cors:AllowedOrigins");
 var trustForwardedHeaders = builder.Configuration.GetValue<bool>("Hosting:TrustForwardedHeaders");
 
-ValidateProductionConfiguration(builder.Configuration, builder.Environment, allowedCorsOrigins);
+ProductionConfigurationValidator.Validate(
+    builder.Configuration,
+    builder.Environment.IsProduction(),
+    allowedCorsOrigins);
 
 if (trustForwardedHeaders)
 {
@@ -298,69 +300,5 @@ static string[] GetConfiguredOrigins(IConfiguration configuration, string sectio
         .Where(origin => !string.IsNullOrWhiteSpace(origin))
         .Distinct(StringComparer.OrdinalIgnoreCase)
         .ToArray() ?? [];
-
-static void ValidateProductionConfiguration(
-    IConfiguration configuration,
-    IWebHostEnvironment environment,
-    string[] allowedCorsOrigins)
-{
-    if (!environment.IsProduction())
-    {
-        return;
-    }
-
-    var jwtSettings = configuration.GetSection("JwtSettings");
-    var jwtIssuer = jwtSettings["Issuer"];
-    var jwtAudience = jwtSettings["Audience"];
-    var jwtSecret = jwtSettings["Secret"];
-
-    if (string.IsNullOrWhiteSpace(jwtIssuer) ||
-        string.IsNullOrWhiteSpace(jwtAudience) ||
-        string.IsNullOrWhiteSpace(jwtSecret) ||
-        Encoding.UTF8.GetByteCount(jwtSecret) < 32 ||
-        jwtSecret.StartsWith("REPLACE", StringComparison.OrdinalIgnoreCase) ||
-        jwtSecret.Contains("DEV_ONLY", StringComparison.OrdinalIgnoreCase))
-    {
-        throw new InvalidOperationException(
-            "Production JwtSettings must include a real issuer, audience, and a random secret of at least 32 bytes.");
-    }
-
-    var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-    if (string.IsNullOrWhiteSpace(connectionString) ||
-        connectionString.Contains("Trusted_Connection=True", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("Integrated Security=True", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("Server=.;", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("localhost", StringComparison.OrdinalIgnoreCase) ||
-        connectionString.Contains("YOUR_", StringComparison.OrdinalIgnoreCase))
-    {
-        throw new InvalidOperationException(
-            "Production ConnectionStrings:DefaultConnection must point to a real hosted SQL Server user/password connection.");
-    }
-
-    if (allowedCorsOrigins.Any(origin =>
-            origin == "*" ||
-            !Uri.TryCreate(origin, UriKind.Absolute, out var originUri) ||
-            !string.Equals(originUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) ||
-            origin.Contains("localhost", StringComparison.OrdinalIgnoreCase) ||
-            origin.Contains("127.0.0.1", StringComparison.OrdinalIgnoreCase)))
-    {
-        throw new InvalidOperationException(
-            "Production Cors:AllowedOrigins must contain only real HTTPS frontend origins.");
-    }
-
-    var defaultAdmin = configuration.GetSection("DefaultAdmin");
-    var defaultAdminEmail = defaultAdmin["Email"];
-    var defaultAdminPassword = defaultAdmin["Password"];
-
-    if (string.IsNullOrWhiteSpace(defaultAdminEmail) ||
-        string.IsNullOrWhiteSpace(defaultAdminPassword) ||
-        defaultAdminPassword.Contains("REPLACE_WITH", StringComparison.OrdinalIgnoreCase) ||
-        string.Equals(defaultAdminPassword, "SopmineShop2026!", StringComparison.Ordinal))
-    {
-        throw new InvalidOperationException(
-            "Production DefaultAdmin must provide a real password different from the development default.");
-    }
-}
 
 public partial class Program { }

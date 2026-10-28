@@ -43,3 +43,12 @@ jobs:
           for file in "${files[@]}"; do
             node --check "$file"
           done
+
+      - name: Run frontend regression tests
+        run: node --test tests/frontend-theme-init.test.mjs tests/product-pricing.test.mjs
+
+      - name: Validate Docker packaging contract
+        run: node --test tests/docker-packaging.test.mjs
+
+      - name: Validate Docker Compose configuration
+        run: docker compose --env-file .env.docker.example config --quiet

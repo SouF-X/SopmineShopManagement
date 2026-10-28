@@ -1496,8 +1496,6 @@ html[data-theme="dark"] .settings-tabs button.is-active .material-symbols-rounde
   .sidebar,
   .topbar,
   .mobile-scrim,
-  .mobile-navigation,
-  .mobile-section-sheet,
   .back-link,
   .record-hero,
   .flow-track,
@@ -2333,22 +2331,8 @@ html[data-theme="dark"] .settings-tabs button.is-active .material-symbols-rounde
 
   .statement-report .statement-table th,
   .statement-report .statement-table td {
-    padding: 2.8mm 2mm;
-    font-size: 9pt;
-  }
-
-  .statement-report .statement-table th {
-    font-size: 8.5pt;
-    font-weight: 700;
-  }
-
-  .statement-report .statement-movement-kind {
-    font-size: 9pt;
-    font-weight: 700;
-  }
-
-  .statement-report .statement-table .mono {
-    font-size: 8.5pt;
+    padding: 2.4mm 1.8mm;
+    font-size: 8pt;
   }
 
   .statement-report-footer {
@@ -2566,8 +2550,7 @@ html[data-theme="dark"] .settings-tabs button.is-active .material-symbols-rounde
 
   .statement-report .statement-table th {
     padding: 3mm 2.2mm;
-    font-size: 8.5pt;
-    font-weight: 700;
+    font-size: 7.5pt;
   }
 
   .statement-report .statement-table th:first-child {
@@ -2580,7 +2563,7 @@ html[data-theme="dark"] .settings-tabs button.is-active .material-symbols-rounde
 
   .statement-report .statement-table td {
     padding: 3.2mm 2.2mm;
-    font-size: 9pt;
+    font-size: 8.5pt;
   }
 
   .statement-contact-strip {

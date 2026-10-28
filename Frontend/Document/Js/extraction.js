@@ -1,7 +1,7 @@
 (function () {
   const Design = window.SopmineDesign;
   const Store = Design.Store;
-  const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+  const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 
   async function extract(file, typeValue = 4) {
     validateImage(file);
@@ -13,7 +13,7 @@
       throw new Error("Choisissez une photo PNG, JPG ou WebP de la facture.");
     }
     if (file.size > MAX_IMAGE_BYTES) {
-      throw new Error("La taille maximale est de 8 Mo pour la lecture OpenAI.");
+      throw new Error("La taille maximale est de 20 Mo.");
     }
   }
 

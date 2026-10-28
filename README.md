@@ -20,28 +20,35 @@ By replacing repetitive manual data entry with digital records and AI-assisted i
 - `src/SopmineWorkshop.Infrastructure` — Entity Framework Core, SQL Server persistence, migrations, identity, and invoice extraction integrations.
 - `src/SopmineWorkshop.Contracts` — request and shared contract types.
 - `Frontend` — static HTML, CSS, and vanilla JavaScript pages served by the local Node server or published with the API.
-- `tests` — .NET domain and infrastructure tests.
+- `tests` — .NET API, domain, infrastructure, frontend, and packaging tests.
 
-## Prerequisites
+## Portable Docker installation
+
+The recommended installation uses Docker Compose to run the bundled application and a private persistent SQL Server Express container:
+
+```powershell
+Copy-Item .\.env.docker.example .\.env
+# Replace every REPLACE_ value in .env.
+docker compose up -d --build
+```
+
+Open `http://127.0.0.1:8080/` after both services are healthy. Docker users do not need to install the .NET SDK, Node.js, or SQL Server separately.
+
+See the complete [Docker installation, update, backup, restore, and troubleshooting guide](docs/docker-installation.md).
+
+See [recovered V3 release notes](docs/recovered-release.md) for the restored VPS fixes, migration compatibility, and verification limits.
+
+## Source-development prerequisites
 
 - .NET 10 SDK
 - Node.js 20 or newer
 - A local SQL Server instance for API development
 
-The API applies Entity Framework Core migrations when it starts. Keep local connection strings, JWT secrets, admin passwords, and the OpenAI API key used for invoice scanning in ignored development configuration or environment variables. Never commit real credentials.
-
-Invoice scanning uses OpenAI vision models. Set `OPENAI_API_KEY` in the process environment, or set `OpenAI__ApiKey` in the ignored `src/SopmineWorkshop.API/appsettings.Development.json` file.
+The API applies Entity Framework Core migrations when it starts. Keep local connection strings, JWT secrets, admin passwords, and AI provider keys in ignored development configuration or environment variables. Never commit real credentials.
 
 ## Local configuration
 
 Create the ignored file `src/SopmineWorkshop.API/appsettings.Development.json`, or use environment variables/user secrets for local values. The committed files `src/SopmineWorkshop.API/.env.example` and `src/SopmineWorkshop.API/appsettings.Production.example.json` contain names and placeholders only.
-
-When running in Development, the built-in seed configuration creates the initial admin account automatically:
-
-- Email: `sopmineshop@gmail.com`
-- Password: `SopmineShop2026!`
-
-Change this password after the first login. Production refuses to start if this development password or any placeholder password is still configured; provide a different `DefaultAdmin__Password` through the production environment.
 
 The local API defaults used by the start script are:
 
@@ -64,26 +71,6 @@ To start without opening a browser:
 
 Open `http://127.0.0.1:5510/`. The API health endpoint is available at `http://127.0.0.1:5269/health`.
 
-## Deploy with Docker
-
-The production image contains the API and the frontend together; Node.js is only needed for the optional local frontend server. The container listens on port `8080` and requires a reachable SQL Server database plus production secrets.
-
-Build the image from the repository root:
-
-```bash
-docker build -t sopmine-workshop .
-```
-
-Create a deployment environment file from `src/SopmineWorkshop.API/.env.example`, replace every `YOUR_` and `REPLACE_WITH_` value, and keep that file outside Git. Run the image with:
-
-```bash
-docker run --name sopmine-workshop --env-file ./src/SopmineWorkshop.API/.env -p 8080:8080 sopmine-workshop
-```
-
-The public reverse proxy should forward HTTPS traffic to container port `8080`. The app health endpoint is `/health`, and the frontend is served from `/`. Set `Cors__AllowedOrigins__0` only when the frontend is hosted on a separate HTTPS origin; leave it unset for the bundled same-origin frontend.
-
-For a direct local .NET run, configure the ignored `src/SopmineWorkshop.API/appsettings.Development.json` or set the same variables in the shell before running `dotnet run`. Production configuration rejects placeholder JWT secrets, local/integrated SQL Server connections, and non-HTTPS CORS origins at startup.
-
 To start only the API:
 
 ```powershell
@@ -101,6 +88,12 @@ dotnet test .\SopmineWorkshop.slnx --configuration Release --no-restore
 ```
 
 The frontend has no package manifest or runtime dependency installation step. Its JavaScript files are validated directly with Node.js, and the same checks run in GitHub Actions.
+
+Run the frontend regression tests with:
+
+```powershell
+node --test .\tests\frontend-theme-init.test.mjs
+```
 
 ## Repository rules
 

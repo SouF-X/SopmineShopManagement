@@ -18,61 +18,53 @@
     fillOptions(form.querySelector('[name="family"]'), Store.state.families, product?.family, "Sélectionner une famille…");
     fillOptions(form.querySelector('[name="unit"]'), Store.state.units, product?.unit, "Sélectionner une unité…");
     fillSuppliers(form.querySelector('[name="supplier"]'), product?.supplierId);
-    const values = product || { name: "", reference: "", imageUrl: "", quantity: 0, minimum: 5, purchase: 0, vat: 20, margin: 0, sale: 0 };
+    const values = product || { name: "", reference: "", imageUrl: "", quantity: 0, minimum: 5, purchase: 0, purchaseTtc: 0, vat: 20, margin: 0, saleHt: 0, sale: 0 };
     set(form, "name", values.name);
     set(form, "reference", values.reference);
     set(form, "imageUrl", values.imageUrl);
     set(form, "quantity", values.quantity);
     set(form, "minimum", values.minimum);
     set(form, "purchase", values.purchase);
+    set(form, "purchaseTtc", values.purchaseTtc);
     set(form, "vat", values.vat);
     set(form, "margin", values.margin);
+    set(form, "saleHt", values.saleHt);
+    set(form, "saleTtc", values.sale);
     setupImageUpload(form);
 
-    const updateSummary = () => {
-      const purchase = U.number(form.elements.purchase.value);
-      const vat = U.number(form.elements.vat.value);
-      const margin = U.number(form.elements.margin.value);
-      const saleHt = purchase * (1 + margin / 100);
-      const saleTtc = saleHt * (1 + vat / 100);
-      const marginLabel = `${margin.toFixed(1)} %`;
-      Design.Dom.setText(page, "[data-sale-ht]", U.money(saleHt));
-      Design.Dom.setText(page, "[data-sale-ttc]", U.money(saleTtc));
-      Design.Dom.setText(page, "[data-summary-purchase]", U.money(purchase));
-      Design.Dom.setText(page, "[data-summary-sale]", U.money(saleHt));
-      Design.Dom.setText(page, "[data-summary-vat]", `${vat} %`);
-      Design.Dom.setText(page, "[data-summary-margin]", marginLabel);
+    let lastEditedField = "margin";
+    const updatePricing = (editedField, preserveEditedValue = false) => {
+      const editedValue = form.elements[editedField]?.value;
+      const pricing = Design.ProductMappers.calculatePricing({
+        purchase: U.number(form.elements.purchase.value),
+        purchaseTtc: U.number(form.elements.purchaseTtc.value),
+        saleHt: U.number(form.elements.saleHt.value),
+        saleTtc: U.number(form.elements.saleTtc.value),
+        vat: U.number(form.elements.vat.value),
+        margin: U.number(form.elements.margin.value),
+      }, editedField);
+
+      ["purchase", "purchaseTtc", "saleHt", "saleTtc", "margin"].forEach((field) => {
+        if (!preserveEditedValue || field !== editedField) form.elements[field].value = pricing[field];
+      });
+      if (preserveEditedValue && form.elements[editedField]) form.elements[editedField].value = editedValue;
+      Design.Dom.setText(page, "[data-sale-ht]", U.money(pricing.saleHt));
+      Design.Dom.setText(page, "[data-sale-ttc]", U.money(pricing.saleTtc));
+      Design.Dom.setText(page, "[data-summary-purchase]", U.money(pricing.purchase));
+      Design.Dom.setText(page, "[data-summary-sale]", U.money(pricing.saleHt));
+      Design.Dom.setText(page, "[data-summary-vat]", `${U.number(form.elements.vat.value)} %`);
+      Design.Dom.setText(page, "[data-summary-margin]", `${pricing.margin.toFixed(1)} %`);
     };
-    let lastEditedPurchase = "ht";
-    const syncPurchaseTtc = () => {
-      const purchase = U.number(form.elements.purchase.value);
-      const vat = U.number(form.elements.vat.value);
-      form.elements.purchaseTtc.value = Number((purchase * (1 + vat / 100)).toFixed(2));
-    };
-    const syncPurchaseHt = () => {
-      const purchaseTtc = U.number(form.elements.purchaseTtc.value);
-      const vat = U.number(form.elements.vat.value);
-      form.elements.purchase.value = Number((purchaseTtc / (1 + vat / 100)).toFixed(2));
-    };
-    syncPurchaseTtc();
-    form.elements.purchase.addEventListener("input", () => {
-      lastEditedPurchase = "ht";
-      syncPurchaseTtc();
-      updateSummary();
+
+    ["purchase", "purchaseTtc", "saleHt", "saleTtc", "vat", "margin"].forEach((field) => {
+      form.elements[field].addEventListener("input", () => {
+        lastEditedField = field;
+        updatePricing(lastEditedField, true);
+      });
+      form.elements[field].addEventListener("blur", () => updatePricing(field));
     });
-    form.elements.purchaseTtc.addEventListener("input", () => {
-      lastEditedPurchase = "ttc";
-      syncPurchaseHt();
-      updateSummary();
-    });
-    form.elements.vat.addEventListener("input", () => {
-      if (lastEditedPurchase === "ttc") syncPurchaseHt();
-      else syncPurchaseTtc();
-      updateSummary();
-    });
-    form.elements.margin.addEventListener("input", updateSummary);
+    updatePricing(lastEditedField);
     form.addEventListener("submit", (event) => save(event, product));
-    updateSummary();
     Design.Shell.mount(page, "products", editing ? "Modifier" : "Ajouter");
   }
 

@@ -34,7 +34,7 @@ if (-not (Test-Endpoint "$apiUrl/health")) {
     try {
         $env:ASPNETCORE_ENVIRONMENT = "Development"
         $env:ASPNETCORE_URLS = $apiUrl
-        Start-Process -FilePath "dotnet" -ArgumentList @("run", "--project", "src/SopmineWorkshop.API/SopmineWorkshop.API.csproj", "--no-launch-profile") -WorkingDirectory $projectRoot | Out-Null
+        Start-Process -FilePath "dotnet" -ArgumentList @("run", "--project", "src/SopmineWorkshop.API/SopmineWorkshop.API.csproj", "--no-launch-profile") -WorkingDirectory $projectRoot -WindowStyle Hidden | Out-Null
     } finally {
         $env:ASPNETCORE_ENVIRONMENT = $previousEnvironment
         $env:ASPNETCORE_URLS = $previousUrls
@@ -49,7 +49,7 @@ if (-not (Test-Endpoint "$clientUrl/")) {
         $env:PORT = "$ClientPort"
         $env:API_PORT = "$ApiPort"
         $env:API_ORIGIN = $apiUrl
-        Start-Process -FilePath "node" -ArgumentList @("server.mjs") -WorkingDirectory $clientRoot | Out-Null
+        Start-Process -FilePath "node" -ArgumentList @("server.mjs") -WorkingDirectory $clientRoot -WindowStyle Hidden | Out-Null
     } finally {
         $env:PORT = $previousPort
         $env:API_PORT = $previousApiPort

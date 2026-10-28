@@ -1,8 +1,13 @@
 **/bin/
 **/obj/
+**/publish/
+**/*.zip
 **/.vs/
 **/.vscode/
 **/*.user
+**/Properties/PublishProfiles/
+**/dotnet-tools.json
+**/appsettings.Development.json
 **/*.log
 **/*.err.log
 **/*.out.log
@@ -10,6 +15,8 @@
 .env
 .env.*
 !.env.example
+!.env.docker.example
+backups/
 tmp/
 artifacts/
 .codex-logs/

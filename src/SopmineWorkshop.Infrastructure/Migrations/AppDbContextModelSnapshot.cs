@@ -642,12 +642,12 @@ namespace SopmineWorkshop.Infrastructure.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<decimal>("PVenteTTC")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("PuAchatHT")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("Quantite")
                         .HasPrecision(18, 2)

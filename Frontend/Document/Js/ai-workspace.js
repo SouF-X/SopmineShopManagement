@@ -239,7 +239,7 @@
     zone.className = "invoice-ai-dropzone";
     zone.type = "button";
     zone.dataset.aiChoose = "";
-    zone.innerHTML = '<span class="invoice-ai-dropzone-icon material-symbols-rounded">upload_file</span><strong>D\u00e9posez votre ' + selectedDocumentLabel() + ' ici</strong><span>PNG, JPG ou WebP \u00b7 8 Mo maximum</span><span class="btn btn-secondary"><span class="material-symbols-rounded">add_photo_alternate</span> Choisir une image</span>';
+    zone.innerHTML = '<span class="invoice-ai-dropzone-icon material-symbols-rounded">upload_file</span><strong>D\u00e9posez votre ' + selectedDocumentLabel() + ' ici</strong><span>PNG, JPG ou WebP \u00b7 20 Mo maximum</span><span class="btn btn-secondary"><span class="material-symbols-rounded">add_photo_alternate</span> Choisir une image</span>';
     return zone;
   }
 

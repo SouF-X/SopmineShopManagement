@@ -141,7 +141,9 @@
   function columnsFor(documentItem) {
     const scope = scopeFor(documentItem);
     const visible = visibleLineFields(scope);
-    const unitTtc = (line) => Number(line.unit || 0) * (1 + Number(line.vat || 0) / 100);
+    const unitTtc = (line) => line.priceTtc != null
+      ? Number(line.priceTtc || 0)
+      : Number(line.unit || 0) * (1 + Number(line.vat || 0) / 100);
     const values = {
       reference: (line) => line.ref || "—",
       product: (line) => line.product || "—",

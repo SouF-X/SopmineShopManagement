@@ -2,6 +2,8 @@
 bin/
 obj/
 node_modules/
+**/publish/
+*.zip
 
 # Local logs and temporary files
 *.log
@@ -17,11 +19,18 @@ artifacts/
 # User-specific IDE files
 .vs/
 .vscode/*.user
+*.user
+**/Properties/PublishProfiles/
+src/SopmineWorkshop.API/dotnet-tools.json
 
 # Local environment files
 .env
 .env.*
 !.env.example
+!.env.docker.example
+
+# Local database backups
+backups/
 
 # Never publish local development secrets
 src/SopmineWorkshop.API/appsettings.Development.json

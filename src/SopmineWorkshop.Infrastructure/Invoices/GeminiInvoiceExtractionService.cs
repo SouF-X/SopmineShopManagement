@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -12,13 +11,13 @@ using SopmineWorkshop.Domain.Invoices;
 
 namespace SopmineWorkshop.Infrastructure.Invoices;
 
-public sealed class OpenAIInvoiceExtractionService(
+public sealed class GeminiInvoiceExtractionService(
     IConfiguration configuration,
-    ILogger<OpenAIInvoiceExtractionService> logger) : IInvoiceExtractionService
+    ILogger<GeminiInvoiceExtractionService> logger) : IInvoiceExtractionService
 {
-    private const int MaxInlineImageSizeInBytes = 8 * 1024 * 1024;
-    private const string DefaultBaseUrl = "https://api.openai.com/v1/chat/completions";
-    private const string DefaultModel = "gpt-4o-mini";
+    private const int MaxInlineImageSizeInBytes = 20 * 1024 * 1024;
+    private const string DefaultBaseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
+    private const string DefaultModel = "gemini-2.0-flash";
 
     private static readonly HttpClient HttpClient = new()
     {
@@ -31,7 +30,7 @@ public sealed class OpenAIInvoiceExtractionService(
     };
 
     private readonly IConfiguration _configuration = configuration;
-    private readonly ILogger<OpenAIInvoiceExtractionService> _logger = logger;
+    private readonly ILogger<GeminiInvoiceExtractionService> _logger = logger;
 
     public async Task<Result<InvoiceExtractionDto>> ExtractFromImageAsync(
         byte[] imageBytes,
@@ -59,18 +58,15 @@ public sealed class OpenAIInvoiceExtractionService(
 
         if (settings is null)
         {
-            _logger.LogWarning("OpenAI invoice extraction is not configured.");
+            _logger.LogWarning("Gemini invoice extraction is not configured.");
             return InvoiceExtractionErrors.ServiceNotConfigured;
         }
 
         var requestUri = BuildRequestUri(settings);
-        var requestBody = CreateRequestBody(
-            settings.Model,
-            Convert.ToBase64String(imageBytes),
-            contentType);
+        var requestBody = CreateRequestBody(Convert.ToBase64String(imageBytes), contentType);
 
         using var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", settings.ApiKey);
+        request.Headers.Add("x-goog-api-key", settings.ApiKey);
         request.Content = new StringContent(
             JsonSerializer.Serialize(requestBody, JsonOptions),
             Encoding.UTF8,
@@ -84,15 +80,15 @@ public sealed class OpenAIInvoiceExtractionService(
             if (!response.IsSuccessStatusCode)
             {
                 _logger.LogWarning(
-                    "OpenAI invoice extraction failed. StatusCode: {StatusCode}, FileName: {FileName}, Response: {Response}",
+                    "Gemini invoice extraction failed. StatusCode: {StatusCode}, FileName: {FileName}, Response: {Response}",
                     response.StatusCode,
                     fileName,
                     responseBody);
 
-                return MapOpenAIError(response.StatusCode, responseBody);
+                return MapGeminiError(response.StatusCode, responseBody);
             }
 
-            return ParseOpenAIResponse(responseBody);
+            return ParseGeminiResponse(responseBody);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
@@ -100,19 +96,19 @@ public sealed class OpenAIInvoiceExtractionService(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "OpenAI invoice extraction failed unexpectedly. FileName: {FileName}", fileName);
+            _logger.LogError(ex, "Gemini invoice extraction failed unexpectedly. FileName: {FileName}", fileName);
             return InvoiceExtractionErrors.ServiceUnavailable;
         }
     }
 
-    private OpenAISettings? GetSettings()
+    private GeminiSettings? GetSettings()
     {
-        var section = _configuration.GetSection("OpenAI");
+        var section = _configuration.GetSection("Gemini");
         var apiKey = section["ApiKey"];
 
         if (string.IsNullOrWhiteSpace(apiKey))
         {
-            apiKey = _configuration["OPENAI_API_KEY"];
+            apiKey = _configuration["GEMINI_API_KEY"];
         }
 
         if (string.IsNullOrWhiteSpace(apiKey))
@@ -123,55 +119,55 @@ public sealed class OpenAIInvoiceExtractionService(
         var model = section["Model"];
         var baseUrl = section["BaseUrl"];
 
-        return new OpenAISettings(
+        return new GeminiSettings(
             apiKey.Trim(),
             string.IsNullOrWhiteSpace(model) ? DefaultModel : model.Trim(),
             string.IsNullOrWhiteSpace(baseUrl) ? DefaultBaseUrl : baseUrl.Trim());
     }
 
-    private static Uri BuildRequestUri(OpenAISettings settings)
+    private static Uri BuildRequestUri(GeminiSettings settings)
     {
-        return new Uri(settings.BaseUrl.Trim());
+        var baseUrl = settings.BaseUrl.TrimEnd('/');
+        var model = NormalizeModelName(settings.Model);
+
+        return new Uri($"{baseUrl}/{model}:generateContent");
     }
 
-    private static object CreateRequestBody(string model, string base64Image, string contentType)
+    private static string NormalizeModelName(string model)
+    {
+        var normalized = model.Trim().Trim('/');
+
+        return normalized.StartsWith("models/", StringComparison.OrdinalIgnoreCase)
+            ? normalized["models/".Length..]
+            : normalized;
+    }
+
+    private static object CreateRequestBody(string base64Image, string contentType)
     {
         return new
         {
-            model,
-            temperature = 0,
-            response_format = new
-            {
-                type = "json_object"
-            },
-            messages = new object[]
+            contents = new[]
             {
                 new
                 {
-                    role = "system",
-                    content = CreatePrompt()
-                },
-                new
-                {
-                    role = "user",
-                    content = new object[]
+                    parts = new object[]
                     {
+                        new { text = CreatePrompt() },
                         new
                         {
-                            type = "text",
-                            text = "Extract the supplier invoice data from the attached image."
-                        },
-                        new
-                        {
-                            type = "image_url",
-                            image_url = new
+                            inline_data = new
                             {
-                                url = $"data:{contentType};base64,{base64Image}",
-                                detail = "high"
+                                mime_type = contentType,
+                                data = base64Image
                             }
                         }
                     }
                 }
+            },
+            generationConfig = new
+            {
+                temperature = 0,
+                response_mime_type = "application/json"
             }
         };
     }
@@ -227,7 +223,7 @@ Rules:
 """;
     }
 
-    private Result<InvoiceExtractionDto> ParseOpenAIResponse(string responseBody)
+    private Result<InvoiceExtractionDto> ParseGeminiResponse(string responseBody)
     {
         if (string.IsNullOrWhiteSpace(responseBody))
         {
@@ -241,7 +237,7 @@ Rules:
 
             if (string.IsNullOrWhiteSpace(text))
             {
-                _logger.LogWarning("OpenAI invoice extraction returned no text part. Response: {Response}", responseBody);
+                _logger.LogWarning("Gemini invoice extraction returned no text part. Response: {Response}", responseBody);
                 return InvoiceExtractionErrors.EmptyResponse;
             }
 
@@ -249,31 +245,36 @@ Rules:
         }
         catch (JsonException ex)
         {
-            _logger.LogWarning(ex, "OpenAI invoice extraction returned invalid JSON envelope.");
+            _logger.LogWarning(ex, "Gemini invoice extraction returned invalid JSON envelope.");
             return InvoiceExtractionErrors.InvalidResponse;
         }
     }
 
     private static string? ReadFirstTextPart(JsonElement root)
     {
-        if (!TryGetProperty(root, "choices", out var choices) ||
-            choices.ValueKind != JsonValueKind.Array)
+        if (!TryGetProperty(root, "candidates", out var candidates) ||
+            candidates.ValueKind != JsonValueKind.Array)
         {
             return null;
         }
 
-        foreach (var choice in choices.EnumerateArray())
+        foreach (var candidate in candidates.EnumerateArray())
         {
-            if (!TryGetProperty(choice, "message", out var message))
+            if (!TryGetProperty(candidate, "content", out var content) ||
+                !TryGetProperty(content, "parts", out var parts) ||
+                parts.ValueKind != JsonValueKind.Array)
             {
                 continue;
             }
 
-            var text = ReadString(message, "content");
-
-            if (!string.IsNullOrWhiteSpace(text))
+            foreach (var part in parts.EnumerateArray())
             {
-                return text;
+                var text = ReadString(part, "text");
+
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    return text;
+                }
             }
         }
 
@@ -660,17 +661,17 @@ Rules:
             || extraction.Lines.Count > 0;
     }
 
-    private static Error MapOpenAIError(HttpStatusCode statusCode, string responseBody)
+    private static Error MapGeminiError(HttpStatusCode statusCode, string responseBody)
     {
         if (statusCode == HttpStatusCode.TooManyRequests ||
-            ContainsAny(responseBody, "RESOURCE_EXHAUSTED", "quota exceeded", "Quota exceeded", "rate_limit_exceeded"))
+            ContainsAny(responseBody, "RESOURCE_EXHAUSTED", "quota exceeded", "Quota exceeded"))
         {
             return InvoiceExtractionErrors.QuotaExceeded;
         }
 
         if (statusCode == HttpStatusCode.Unauthorized ||
             statusCode == HttpStatusCode.Forbidden ||
-            ContainsAny(responseBody, "invalid_api_key", "Incorrect API key", "permission denied", "PERMISSION_DENIED"))
+            ContainsAny(responseBody, "API key not valid", "permission denied", "PERMISSION_DENIED"))
         {
             return InvoiceExtractionErrors.InvalidApiKey;
         }
@@ -691,5 +692,5 @@ Rules:
         return false;
     }
 
-    private sealed record OpenAISettings(string ApiKey, string Model, string BaseUrl);
+    private sealed record GeminiSettings(string ApiKey, string Model, string BaseUrl);
 }

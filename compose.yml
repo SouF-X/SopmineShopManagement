@@ -1,0 +1,75 @@
+name: sopmine-shop-management
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "${MSSQL_PID:-Express}"
+      MSSQL_SA_PASSWORD: "${SQL_SA_PASSWORD:?Copy .env.docker.example to .env and set SQL_SA_PASSWORD}"
+      SQLCMDPASSWORD: "${SQL_SA_PASSWORD:?Copy .env.docker.example to .env and set SQL_SA_PASSWORD}"
+      SQL_DATABASE: "${SQL_DATABASE:-SopmineShop}"
+    volumes:
+      - sopmine_sql_data:/var/opt/mssql
+    networks:
+      - database
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          (/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" ||
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$${MSSQL_SA_PASSWORD}" -Q "SELECT 1") >/dev/null 2>&1
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    stop_grace_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=${SQL_DATABASE:-SopmineShop};User Id=sa;Password=${SQL_SA_PASSWORD:?Copy .env.docker.example to .env and set SQL_SA_PASSWORD};Encrypt=True;TrustServerCertificate=True"
+      JwtSettings__Issuer: "${JWT_ISSUER:?Set JWT_ISSUER in .env}"
+      JwtSettings__Audience: "${JWT_AUDIENCE:?Set JWT_AUDIENCE in .env}"
+      JwtSettings__Secret: "${JWT_SECRET:?Set JWT_SECRET in .env}"
+      JwtSettings__TokenExpirationInMinutes: "${JWT_TOKEN_EXPIRATION_MINUTES:-60}"
+      DefaultAdmin__Email: "${DEFAULT_ADMIN_EMAIL:?Set DEFAULT_ADMIN_EMAIL in .env}"
+      DefaultAdmin__Password: "${DEFAULT_ADMIN_PASSWORD:?Set DEFAULT_ADMIN_PASSWORD in .env}"
+      DefaultAdmin__Role: "${DEFAULT_ADMIN_ROLE:-Admin}"
+      Gemini__ApiKey: "${GEMINI_API_KEY:-}"
+      Gemini__Model: "${GEMINI_MODEL:-gemini-2.5-flash}"
+      Gemini__BaseUrl: "${GEMINI_BASE_URL:-https://generativelanguage.googleapis.com/v1beta/models}"
+      Hosting__UseHttpsRedirection: "false"
+      Hosting__UseHsts: "false"
+      Hosting__TrustForwardedHeaders: "false"
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8080}:8080"
+    volumes:
+      - sopmine_data_protection_keys:/home/app/.aspnet/DataProtection-Keys
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    read_only: true
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - database
+      - egress
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+volumes:
+  sopmine_sql_data:
+  sopmine_data_protection_keys:
+
+networks:
+  database:
+    internal: true
+  egress:

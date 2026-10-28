@@ -14,14 +14,20 @@ COPY ["Frontend/", "Frontend/"]
 RUN dotnet publish src/SopmineWorkshop.API/SopmineWorkshop.API.csproj \
     --configuration Release \
     --output /app/publish \
+    --no-restore \
     /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 
 ENV ASPNETCORE_URLS=http://+:8080
-ENV ASPNETCORE_ENVIRONMENT=Production
 EXPOSE 8080
 
-COPY --from=build /app/publish .
+RUN mkdir -p /home/app/.aspnet/DataProtection-Keys \
+    && chown -R $APP_UID:$APP_UID /home/app/.aspnet /app
+
+COPY --from=build --chown=$APP_UID:$APP_UID /app/publish .
+
+USER $APP_UID
+
 ENTRYPOINT ["dotnet", "SopmineWorkshop.API.dll"]

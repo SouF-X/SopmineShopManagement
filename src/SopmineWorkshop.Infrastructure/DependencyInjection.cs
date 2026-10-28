@@ -71,7 +71,7 @@ public static class DependencyInjection
 
         services.AddTransient<IIdentityService, IdentityService>();
         services.AddTransient<ITokenProvider, TokenProvider>();
-        services.AddTransient<IInvoiceExtractionService, OpenAIInvoiceExtractionService>();
+        services.AddTransient<IInvoiceExtractionService, GeminiInvoiceExtractionService>();
         services.AddHybridCache(options => options.DefaultEntryOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(10),
